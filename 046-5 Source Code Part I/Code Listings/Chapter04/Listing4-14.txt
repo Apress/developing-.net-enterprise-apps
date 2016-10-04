@@ -1,0 +1,37 @@
+public void SendBusinessObject( string strTargetProcess, string strSubject, 
+    BusinessObject objSource )
+{
+    string strTargetQueueName;
+    MessageQueue queue = null;
+
+    try
+    {
+        strTargetQueueName = ".\\private$\\" + strTargetProcess + "Inbox";
+
+        queue = new MessageQueue( strTargetQueueName );
+        Message message = new Message();
+
+        //specify the message formatter
+        BinaryMessageFormatter formatter = new BinaryMessageFormatter();
+        message.Formatter = formatter;
+
+        //set the message properties
+        message.Label = strSubject;
+        formatter.Write( message, objSource );
+
+        //send the binary serialized message
+        queue.Send( message );
+    }
+    catch( MessageQueueException exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        queue.Close();
+    }
+
+    return;
+}

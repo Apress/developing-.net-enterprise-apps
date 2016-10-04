@@ -1,0 +1,19 @@
+protected void Application_AuthenticateRequest(Object sender, EventArgs e)
+{
+    HttpApplication application = ( HttpApplication )sender;
+
+    if( application.Request.IsAuthenticated && 
+        application.User.Identity is FormsIdentity )
+    {
+        FormsIdentity identity = (FormsIdentity)application.User.Identity;
+
+        if( identity.Name == "demo" )
+        {
+            application.Context.User = new GenericPrincipal( identity, 
+                new string[] 
+                { "Managers", "All" } );
+        }
+    }
+
+    return;
+}

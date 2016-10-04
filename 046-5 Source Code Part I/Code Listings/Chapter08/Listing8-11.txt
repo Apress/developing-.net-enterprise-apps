@@ -1,0 +1,57 @@
+public Controller()
+{
+    ObjectMappingEntry entry;
+
+    XmlDocument xmldoc = new XmlDocument();
+    xmldoc.Load( "WinUI.exe.config" );
+    XmlNode root = xmldoc.DocumentElement;
+
+    try 
+    {
+        XmlNodeList xnodelist = 
+            root.SelectNodes( "/configuration/Viewers/Include" ); 
+
+        foreach( XmlNode xnode in xnodelist )
+        {
+            //create a new entry object
+            entry = new ObjectMappingEntry();
+
+            //translate the integer into a ControllerAction
+            switch( int.Parse(xnode.Attributes["Action"].Value) )
+            {
+                case 1:
+                    entry.Action = ControllerActions.New;
+                    break;
+                case 2:
+                    entry.Action = ControllerActions.View;
+                    break;
+                case 3:
+                    entry.Action = ControllerActions.Edit;
+                    break;
+                case 4:
+                    entry.Action = ControllerActions.Delete;
+                    break;
+            }
+
+            //set the BusinessObjectName
+            entry.BusinessObjectName = 
+                xnode.Attributes["BusinessObjectName"].Value;
+
+            //set the viewer name
+            entry.Viewer = xnode.Attributes["Viewer"].Value;
+
+            //add this mapping to the collection
+            _ObjectMappings.Add( entry );
+
+        }
+    
+    } 
+    catch( Exception x ) 
+    {          
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+    }
+ 
+    return;
+}

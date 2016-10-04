@@ -1,0 +1,94 @@
+public abstract class BusinessObjectCollection : IEnumerable
+{
+    //manage business objects within an ArrayList with a default size of 25
+    ArrayList _Objects = new ArrayList(25);
+
+    //force derived classes to implement the New method
+    public abstract BusinessObject New();
+
+    //add a new business object to the collection
+    public void Add( BusinessObject argObject )
+    {
+        _Objects.Add( argObject );
+    }
+
+    //return the number of contained business objects
+    public int Count
+    {
+        get
+        {
+            return( _Objects.Count );
+        }
+    }
+
+    //internally validate if an array index is valid
+    private void CheckIndex(int argIndex)
+    {
+        if( argIndex >= _Objects.Count )
+            throw new ArgumentOutOfRangeException( "Index out of range" );
+    }
+
+    //return a business object by array index reference
+    public BusinessObject this[int argIndex]
+    {
+        get
+        {
+            CheckIndex(argIndex);
+            return (BusinessObject)_Objects[argIndex];
+        }
+        set
+        {
+            CheckIndex(argIndex);
+            _Objects[argIndex] = value;
+        }
+    }
+
+    //return the associated enumerator object
+    public IEnumerator GetEnumerator()
+    {
+        return( new BusinessObjectCollectionEnumerator(this) );
+    }
+}
+
+
+
+class BusinessObjectCollectionEnumerator: IEnumerator
+{
+    BusinessObjectCollection _Collection;
+    int _Index;
+
+    //initialize the enumerator with the collection
+    internal BusinessObjectCollectionEnumerator(
+        BusinessObjectCollection argCollection)
+    {
+        _Collection = argCollection;
+        Reset();
+    }
+
+    //advance the current position to the next element
+    public bool MoveNext()
+    {
+        _Index++;
+        if( _Index >= _Collection.Count )
+            return( false );
+
+        else
+            return( true );
+    }
+
+    //return the current business object
+    public object Current
+    {
+        get
+        {
+            return( _Collection[ _Index ]);
+        }
+    }
+
+    //reset the enumerator
+    public void Reset()
+    {
+        _Index = -1;
+    }
+
+}

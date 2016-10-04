@@ -1,0 +1,6 @@
+public String GetFormattedCurrency( int intAmount, String strCulture )
+{
+    CultureInfo culture = new CultureInfo( strCulture );
+
+    return intAmount.ToString( "c", culture );
+}

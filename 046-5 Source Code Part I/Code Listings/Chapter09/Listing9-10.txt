@@ -1,0 +1,8 @@
+public string GetSpecificIssueXml( int argLongIssueID )
+{
+    string strOutput;
+    Issue objIssue = new Issue();
+
+    strOutput = _ObjectManager.SelectOneAsXML( objIssue, argLongIssueID );
+    return strOutput;
+} 

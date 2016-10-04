@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://tempuri.org/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://tempuri.org/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ValidateLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strEmailAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidateLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateLoginResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckKeyResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </types>
+  <message name="ValidateLoginSoapIn">
+    <part name="parameters" element="s0:ValidateLogin" />
+  </message>
+  <message name="ValidateLoginSoapOut">
+    <part name="parameters" element="s0:ValidateLoginResponse" />
+  </message>
+  <message name="CheckKeySoapIn">
+    <part name="parameters" element="s0:CheckKey" />
+  </message>
+  <message name="CheckKeySoapOut">
+    <part name="parameters" element="s0:CheckKeyResponse" />
+  </message>
+  <portType name="LoginServicesSoap">
+    <operation name="ValidateLogin">
+      <input message="s0:ValidateLoginSoapIn" />
+      <output message="s0:ValidateLoginSoapOut" />
+    </operation>
+    <operation name="CheckKey">
+      <input message="s0:CheckKeySoapIn" />
+      <output message="s0:CheckKeySoapOut" />
+    </operation>
+  </portType>
+  <binding name="LoginServicesSoap" type="s0:LoginServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <operation name="ValidateLogin">
+      <soap:operation soapAction="http://tempuri.org/ValidateLogin" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="CheckKey">
+      <soap:operation soapAction="http://tempuri.org/CheckKey" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="LoginServices">
+    <port name="LoginServicesSoap" binding="s0:LoginServicesSoap">
+      <soap:address location="http://127.0.0.1/IssueTracker/IssueTracker_WebService/LoginServices.asmx" />
+    </port>
+  </service>
+</definitions>

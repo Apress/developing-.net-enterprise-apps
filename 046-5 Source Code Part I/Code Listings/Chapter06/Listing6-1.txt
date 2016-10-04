@@ -1,0 +1,11 @@
+public class IssueTrackerAIC : ServicedComponent, IBTSAppIntegration
+{
+    public IssueTrackerAIC()
+    {
+    }
+
+    string IBTSAppIntegration.ProcessMessage( string strDocument )
+    {
+        return "Welcome to BizTalk!";
+    }
+}

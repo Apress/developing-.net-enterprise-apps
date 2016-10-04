@@ -1,0 +1,29 @@
+private void SendAlertToUser()
+{
+    User userTo = new User();
+    userTo.EmailAddress = "sendto@something.com";
+
+    User userFrom = new User();
+    userFrom.EmailAddress =  "sentfrom@something.com";
+
+    User userCc = new User();
+    userCc.EmailAddress = "copyto@something.com";
+
+    User userBcc = new User();
+    userBcc.EmailAddress =  "blindcopyto@something.com";
+
+    MailMessage message = new MailMessage();
+    message.Subject = "IssueTracker Alert";
+    message.Body = "A new issue has been assigned to you.";
+
+    EmailService mail = new EmailService();
+    mail.SendTo = userTo;
+    mail.SendCc = userCc;
+    mail.SendBcc = userBcc;
+    mail.SentFrom = userFrom;
+    mail.OutgoingMessage = message;
+
+    mail.SendMessage();
+
+    return;
+}

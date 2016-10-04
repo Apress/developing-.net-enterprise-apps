@@ -1,0 +1,29 @@
+public Message ReceiveTransactionMessage()
+{
+    MessageQueueTransaction queueTransaction = new MessageQueueTransaction();
+    Message message = null;
+    MessageQueue queue = null;
+
+    try
+    {
+        queue = new MessageQueue( _QueueInboxName );
+                    
+        queueTransaction.Begin();
+        message = queue.Receive( queueTransaction );
+        queueTransaction.Commit();
+    }
+    catch( Exception exception )
+    {
+        queueTransaction.Abort();
+
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        queue.Close();
+    }
+
+    return message;
+}

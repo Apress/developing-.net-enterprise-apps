@@ -1,0 +1,11 @@
+public void DisplayReminderMessage()
+{
+	Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+
+	DateTime dateNow = DateTime.Now;
+	dateNow = dateNow.AddDays(30);
+
+	MessageBox.Show( "A 30 Day reminder will be sent on: " + dateNow.ToString("d") );
+
+	return;
+}

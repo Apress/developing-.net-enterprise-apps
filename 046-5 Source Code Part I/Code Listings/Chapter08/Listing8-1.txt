@@ -1,0 +1,8 @@
+private void FormMain_Load( object sender, System.EventArgs e )
+{
+    FormIssueSummary dlgSummary = new FormIssueSummary();
+    dlgSummary.MdiParent = this;
+    dlgSummary.Show();
+
+    return;
+}

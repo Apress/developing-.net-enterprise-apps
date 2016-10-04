@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema id="DataSetIssueTracker"
+    xmlns="http://www.tempuri.org/DataSetIssueTracker.xsd" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="http://www.tempuri.org/DataSetIssueTracker.xsd"
+    attributeFormDefault="qualified" 
+    elementFormDefault="qualified" >
+
+    <xs:element name="DataSetIssueTracker">
+    <xs:complexType>
+    <xs:choice maxOccurs="unbounded">
+    <xs:element name="Dat_Issue">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="IssueID" type="xs:long" />
+                <xs:element name="TypeID" type="xs:int" minOccurs="0" />
+                <xs:element name="UserID" type="xs:long" minOccurs="0" />
+                <xs:element name="EntryDate" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="StatusID" type="xs:int" minOccurs="0" />
+                <xs:element name="Summary" type="xs:string" minOccurs="0" />
+                <xs:element name="Description" type="xs:string" minOccurs="0" />
+                <xs:element name="PriorityID" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Dat_User">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="UserID" type="xs:long" />
+                <xs:element name="Password" type="xs:string" minOccurs="0" />
+                <xs:element name="Firstname" type="xs:string" minOccurs="0" />
+                <xs:element name="Lastname" type="xs:string" minOccurs="0" />
+                <xs:element name="EmailAddress" type="xs:string" minOccurs="0" />
+                <xs:element name="UserType" type="xs:int" minOccurs="0" />
+                <xs:element name="CreateDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Dat_Issue_Constraint" msdata:ConstraintName="Constraint1"
+        msdata:PrimaryKey="true">
+        <xs:selector xpath=".//mstns:Dat_Issue" />
+        <xs:field xpath="mstns:IssueID" />
+    </xs:unique>
+    <xs:unique name="Dat_User_Constraint" msdata:ConstraintName="Constraint"
+        msdata:PrimaryKey="true">
+        <xs:selector xpath=".//mstns:Dat_User" />
+        <xs:field xpath="mstns:UserID" />
+    </xs:unique>
+    </xs:element>
+</xs:schema>

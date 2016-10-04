@@ -1,0 +1,7 @@
+private void DirectoryWatch_Changed(object sender, 
+System.IO.FileSystemEventArgs e)
+{
+    //read the file and send to the server
+    ReadAllRecords();
+    return;
+}

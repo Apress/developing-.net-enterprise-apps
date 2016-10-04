@@ -1,0 +1,16 @@
+[WebMethod(EnableSession=true)]
+public string GetSpecificIssue( string strKey, int argIssueID )
+{
+    //check key
+    LoginServices svcLogin = new LoginServices();
+
+    if( svcLogin.CheckKey( strKey ).StartsWith( "OK" ) )
+    {
+        BusinessFacade.IssueManager mgrIssues = new
+            BusinessFacade.IssueManager();
+
+        return mgrIssues.GetSpecificIssueXml( argIssueID );
+    }
+
+    return null;
+}

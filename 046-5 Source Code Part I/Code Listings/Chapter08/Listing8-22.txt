@@ -1,0 +1,21 @@
+private void FormMain_DragDrop( object sender, 
+    System.Windows.Forms.DragEventArgs e )
+{
+    //close the active MDI child
+    if( this.ActiveMdiChild != null )
+        this.ActiveMdiChild.Close();
+
+    //initialize the new MDI child
+    this.dlgViewIssue = new FormIssueView();
+    dlgViewIssue.MdiParent = this;
+    dlgViewIssue.Dock = System.Windows.Forms.DockStyle.Fill;
+
+    //supply the IssueID carried through the Drag process
+    dlgViewIssue.SetIssueID( int.Parse( e.Data.GetData( 
+        DataFormats.Text ).ToString() ) );
+
+    //display the new MDI child
+    dlgViewIssue.Show();
+
+    return;
+}

@@ -1,0 +1,40 @@
+<message name="ValidateLoginSoapIn">
+    <part name="parameters" element="s0:ValidateLogin" /> 
+</message>
+<message name="ValidateLoginSoapOut">
+    <part name="parameters" element="s0:ValidateLoginResponse" /> 
+</message>
+<message name="CheckKeySoapIn">
+    <part name="parameters" element="s0:CheckKey" /> 
+</message>
+<message name="CheckKeySoapOut">
+    <part name="parameters" element="s0:CheckKeyResponse" /> 
+</message>
+
+<message name="ValidateLoginHttpGetIn">
+    <part name="strEmailAddress" type="s:string" /> 
+    <part name="strPassword" type="s:string" /> 
+</message>
+<message name="ValidateLoginHttpGetOut">
+    <part name="Body" element="s0:string" /> 
+</message>
+<message name="CheckKeyHttpGetIn">
+    <part name="strKey" type="s:string" /> 
+</message>
+<message name="CheckKeyHttpGetOut">
+    <part name="Body" element="s0:string" /> 
+</message>
+
+<message name="ValidateLoginHttpPostIn">
+    <part name="strEmailAddress" type="s:string" /> 
+    <part name="strPassword" type="s:string" /> 
+</message>
+<message name="ValidateLoginHttpPostOut">
+    <part name="Body" element="s0:string" /> 
+</message>
+<message name="CheckKeyHttpPostIn">
+    <part name="strKey" type="s:string" /> 
+</message>
+<message name="CheckKeyHttpPostOut">
+    <part name="Body" element="s0:string" /> 
+</message>

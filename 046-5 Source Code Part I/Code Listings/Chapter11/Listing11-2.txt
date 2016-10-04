@@ -1,0 +1,26 @@
+private void CreateSqlDatabase()
+{
+    //specify the location of the local device database
+    string strDataPath = "\\My Documents\\IssueTracker.sdf";
+
+    try
+    {
+        //check to determine of local device database already exists    
+        if( ! System.IO.File.Exists( strDataPath ) )
+        {
+            //define a connection string and create the device database file
+            SqlCeEngine engine = new SqlCeEngine( "Data Source=" + strDataPath );
+            engine.CreateDatabase();
+        }
+    }
+    catch( SqlCeException x )
+    {
+        MessageBox.Show( x.Message );
+    }
+    catch( Exception x )
+    {
+        MessageBox.Show( x.Message );
+    }
+
+    return;
+}

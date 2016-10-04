@@ -1,0 +1,25 @@
+public MessageEnumerator ReceiveAllMessages()
+{
+    MessageQueue queue = null;
+    MessageEnumerator enumerator = null;
+
+    try
+    {
+        queue = new MessageQueue( _QueueInboxName );
+
+        //retrieve all messages from the queue
+        enumerator = (MessageEnumerator)(queue.GetEnumerator());
+    }
+    catch( Exception exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        queue.Close();
+    }
+
+    return enumerator;
+}

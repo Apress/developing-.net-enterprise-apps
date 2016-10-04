@@ -1,0 +1,66 @@
+CREATE PROCEDURE [dbo].[app_IssueSelectAll]
+AS SET NOCOUNT ON;
+SELECT IssueID, TypeID, UserID, EntryDate, StatusID, Summary, Description,
+PriorityID FROM Dat_Issue
+GO
+
+CREATE PROCEDURE [dbo].[app_IssueSelect]
+(
+    @IssueID int
+)
+AS SET NOCOUNT ON;
+SELECT IssueID, TypeID, UserID, EntryDate, StatusID, Summary, Description,
+PriorityID FROM Dat_Issue WHERE (IssueID = @IssueID);
+GO
+
+CREATE PROCEDURE [dbo].[app_IssueInsert]
+(
+    @IssueID int,
+    @TypeID int,
+    @UserID int,
+    @EntryDate datetime,
+    @StatusID int,
+    @Summary char(128),
+    @Description text,
+    @PriorityID int,
+    @ModifiedDate datetime
+)
+AS SET NOCOUNT OFF;
+INSERT INTO Dat_Issue(IssueID, TypeID, UserID, EntryDate, StatusID, Summary,
+Description, PriorityID, ModifiedDate) VALUES (@IssueID, @TypeID, @UserID,
+@EntryDate, @StatusID, @Summary, @Description, @PriorityID, @ModifiedDate);
+GO
+
+CREATE PROCEDURE [dbo].[app_IssueUpdate]
+(
+    @IssueID int,
+    @TypeID int,
+    @UserID int,
+    @EntryDate datetime,
+    @StatusID int,
+    @Summary char(128),
+    @Description text,
+    @PriorityID int,
+    @ModifiedDate datetime,
+    @Original_IssueID int,
+    @Original_ModifiedDate datetime
+)
+AS SET NOCOUNT OFF;
+UPDATE Dat_Issue SET IssueID = @IssueID, TypeID = @TypeID, UserID = @UserID,
+EntryDate = @EntryDate, StatusID = @StatusID, Summary = @Summary, Description =
+@Description, PriorityID = @PriorityID, ModifiedDate = @ModifiedDate WHERE
+(IssueID = @Original_IssueID) AND (ModifiedDate = @Original_ModifiedDate);
+
+IF @@ROWCOUNT=0
+    RAISERROR ('Optimistic concurrency failed.', 10, 1)
+GO
+
+CREATE PROCEDURE [dbo].[app_IssueDelete]
+(
+    @Original_IssueID int,
+    @Original_ModifiedDate datetime
+)
+AS SET NOCOUNT OFF;
+DELETE FROM Dat_Issue WHERE (IssueID = @Original_IssueID) AND 
+(ModifiedDate = @Original_ModifiedDate);
+GO

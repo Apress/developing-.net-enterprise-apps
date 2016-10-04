@@ -1,0 +1,36 @@
+public void SendTransactionMessages( string strTargetProcess, 
+    ArrayList arrayMessages )
+{
+    string strTargetQueueName;
+    MessageQueueTransaction queueTransaction = new MessageQueueTransaction();
+    MessageQueue queue = null;
+
+    try
+    {
+        strTargetQueueName = ".\\private$\\" + strTargetProcess + "Inbox";
+        queue = new MessageQueue( strTargetQueueName );
+                    
+        queueTransaction.Begin();
+
+        foreach( Message message in arrayMessages )
+        {
+            queue.Send( message, queueTransaction );
+        }
+
+        queueTransaction.Commit();
+    }
+    catch( Exception exception )
+    {
+        queueTransaction.Abort();
+
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        queue.Close();
+    }
+
+    return;
+}

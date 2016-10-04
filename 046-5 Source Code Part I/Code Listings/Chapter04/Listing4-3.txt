@@ -1,0 +1,26 @@
+public void DeleteQueues()
+{
+    try
+    {
+        //delete the inbox queue
+        if( ! MessageQueue.Exists( _QueueInboxName ) )
+            MessageQueue.Delete( _QueueInboxName );
+
+        //delete the outbox queue
+        if( ! MessageQueue.Exists( _QueueOutboxName ) )
+            MessageQueue.Delete( _QueueOutboxName );
+
+        //delete the errors queue
+        if( ! MessageQueue.Exists( _QueueErrorsName ) )
+            MessageQueue.Delete( _QueueErrorsName );
+
+    }
+    catch( MessageQueueException exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+
+    return;
+} 

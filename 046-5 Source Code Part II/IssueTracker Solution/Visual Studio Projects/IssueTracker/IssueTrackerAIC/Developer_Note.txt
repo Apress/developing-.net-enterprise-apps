@@ -1,0 +1,7 @@
+Note: This project depends upon a COM reference to "Microsoft BizTalk Server 
+Application Interface Component 1.0 Type Library". If you do not have this 
+library installed (via BizTalk Server installation) then this project will
+not compile, resulting in the whole solution not compiling. Therefore, 
+this project is marked as not compiled for both Debug and Release projects. To
+enable compilation, select Build->Configuration Manager from the menu and
+check the IssueTrackerAIC entry.

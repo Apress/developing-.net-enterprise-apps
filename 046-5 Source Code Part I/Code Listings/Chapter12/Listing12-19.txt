@@ -1,0 +1,31 @@
+public void ProcessIncomingMessages()
+{
+    do
+    {
+        try
+        {
+            MessageQueue queue = new MessageQueue( "server\\integrationQueue" );
+            Message message = queue.Receive( new TimeSpan(0,0,3) );
+
+            message.Formatter = new XmlMessageFormatter(
+                new string[] {"System.String,mscorlib"} );
+
+            ProcessRequest( message.Body );
+        }
+        catch( Exception x )
+        {
+            EventLog systemLog = new EventLog();
+            systemLog.Source = "Integration Adapter";
+            systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+            systemLog.Dispose();
+        }
+        finally
+        {
+            message.Dispose();
+            queue.Dispose();
+        }
+
+    }while ( true );
+
+    return;
+}

@@ -1,0 +1,32 @@
+public void EmptyQueue( MessagingFramework.QueueType queueType )
+{
+    MessageQueue queue = null;
+
+    try
+    {
+        switch( queueType )
+        {
+            case QueueType.Inbox:
+                queue = new MessageQueue( _QueueInboxName );
+                break;
+
+            case QueueType.Outbox:
+                queue = new MessageQueue( _QueueOutboxName );
+                break;
+
+            case QueueType.Errors:
+                queue = new MessageQueue( _QueueErrorsName );
+                break;
+        }
+
+        queue.Purge();
+    }
+    catch( MessageQueueException exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+
+    return;
+}

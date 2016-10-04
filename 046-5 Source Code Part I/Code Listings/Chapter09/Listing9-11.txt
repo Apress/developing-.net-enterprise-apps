@@ -1,0 +1,52 @@
+public string SelectOneAsXML( BusinessObject objSource, int intObjectID )
+{
+    bool boolStatus = false;
+    string strObject;
+    string strStoredProc;
+    string strOutput = "";
+    SqlParameter parameter;
+    SqlCommand command;
+
+    try
+    {
+        //get the object name
+        Type objType = objSource.GetType();
+        strObject = objType.FullName.Substring( objType.FullName.IndexOf(".")+1);
+
+        //get the stored procedure name
+        strStoredProc = "app_";
+        strStoredProc += strObject;
+        strStoredProc += "SelectAsXml";
+
+        //initialize the command
+        command = new SqlCommand( strStoredProc, dataComponent.sqlConnection );
+        command.CommandType = CommandType.StoredProcedure;
+
+        //add the ID parameter
+        parameter = new SqlParameter( "@" + strObject + "ID", SqlDbType.Int );
+        parameter.Direction = ParameterDirection.Input;
+        parameter.Value = intObjectID;
+        command.Parameters.Add( parameter );
+
+        //open the connection and execute query
+        dataComponent.sqlConnection.Open();
+        XmlReader reader = command.ExecuteXmlReader();
+				
+        reader.MoveToContent();
+        strOutput = reader.ReadOuterXml();
+        reader.Close();
+				
+    }
+    catch( Exception exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        dataComponent.sqlConnection.Close();
+    }
+
+    return strOutput;
+}

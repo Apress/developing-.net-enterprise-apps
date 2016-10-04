@@ -1,0 +1,11 @@
+Dear Administrator,
+
+Issue # <Issue.IssueID> was filed on <Issue.Date>. The description of the new Issue is:
+
+<Issue.Summary>
+--------------------------------
+<Issue.Description>
+
+Sincerely,
+
+IssueTracker Auto-mailer

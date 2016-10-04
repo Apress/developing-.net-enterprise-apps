@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://tempuri.org/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://tempuri.org/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetSpecificIssue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="argIssueID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSpecificIssueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSpecificIssueResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </types>
+  <message name="GetSpecificIssueSoapIn">
+    <part name="parameters" element="s0:GetSpecificIssue" />
+  </message>
+  <message name="GetSpecificIssueSoapOut">
+    <part name="parameters" element="s0:GetSpecificIssueResponse" />
+  </message>
+  <portType name="IssueServicesSoap">
+    <operation name="GetSpecificIssue">
+      <input message="s0:GetSpecificIssueSoapIn" />
+      <output message="s0:GetSpecificIssueSoapOut" />
+    </operation>
+  </portType>
+  <binding name="IssueServicesSoap" type="s0:IssueServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <operation name="GetSpecificIssue">
+      <soap:operation soapAction="http://tempuri.org/GetSpecificIssue" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="IssueServices">
+    <port name="IssueServicesSoap" binding="s0:IssueServicesSoap">
+      <soap:address location="http://127.0.0.1/IssueTracker/IssueTracker_WebService/IssueServices.asmx" />
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,8 @@
+private void lnkLogout_Click(object sender, System.EventArgs e)
+{
+    FormsAuthentication.SignOut();
+    Session.Clear();
+    Response.Redirect( "Pages/app_login.aspx" );
+
+    return;
+}

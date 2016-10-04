@@ -1,0 +1,29 @@
+public Message PeekMessages( string strLookFor )
+{
+    MessageQueue queue = null;
+    Message message = null;
+
+    try
+    {
+        queue = new MessageQueue( _QueueInboxName );
+        message = queue.Peek();
+
+        string[] types = { "System.String" };
+        message.Formatter = new XmlMessageFormatter( types );
+
+        if( message.Label.IndexOf( strLookFor ) >= 0 )
+            return message;
+    }
+    catch( Exception exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        queue.Close();
+    }
+
+    return message;
+}

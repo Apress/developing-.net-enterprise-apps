@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+    <HEAD>
+        <title>GridLayout</title>
+        <meta name="GENERATOR" Content="Microsoft Visual Studio .NET 7.1">
+        <meta name="CODE_LANGUAGE" Content="C#">
+        <meta name="vs_defaultClientScript" content="JavaScript">
+        <meta name="vs_targetSchema"
+            content="http://schemas.microsoft.com/intellisense/nav4-0">
+    </HEAD>
+    <body MS_POSITIONING="GridLayout">
+    <TABLE height="377" cellSpacing="0" cellPadding="0" width="218" border="1" 
+        ms_2d_layout="TRUE">
+        <TR vAlign="top">
+        <TD width="218" height="377">
+            <form name="Form1" method="post" action="GridLayout.aspx" id="Form1">
+                <input type="hidden" name="__VIEWSTATE" 
+                    value="dDwtMTMxMzA2ODI5ODs7PmyeHStznlqmkTb090NU3FrpXTeC" />
+                <TABLE height="201" cellSpacing="0" cellPadding="0" width="365" 
+                    border="1" ms_2d_layout="TRUE">
+                    <TR vAlign="top">
+                        <TD width="96" height="96"></TD>
+                        <TD width="112"></TD>
+                        <TD width="157" rowSpan="2"></TD>
+                    </TR>
+                    <TR vAlign="top">
+                        <TD height="8"></TD>
+                        <TD rowSpan="2">
+                        <span id="Label1">E-mail Address:</span></TD>
+                    </TR>
+                    <TR vAlign="top">
+                        <TD height="32"></TD>
+                        <TD>
+                        <input name="TextBox1" type="text" id="TextBox1" /></TD>
+                    </TR>
+                    <TR vAlign="top">
+                        <TD height="40"></TD>
+                        <TD>
+                        <span id="Label2">Password:</span></TD>
+                        <TD>
+                        <input name="TextBox2" type="text" id="TextBox2" /></TD>
+                    </TR>
+                    <TR vAlign="top">
+                        <TD colSpan="2" height="25"></TD>
+                        <TD>
+                        <input type="submit" name="Button1" value="   OK   " 
+                            id="Button1" /></TD>
+                    </TR>
+                </TABLE>
+            </form>
+        </TD>
+        </TR>
+        </TABLE>
+    </body>
+</HTML>

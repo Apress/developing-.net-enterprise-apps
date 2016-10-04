@@ -1,0 +1,16 @@
+<authentication mode="Forms" >
+    <forms loginUrl="app_login.aspx" name="issuetracker" timeout="60" path="/" >
+        <credentials passwordFormat="SHA1">
+            <user name="jkanalakis" 
+                password="5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8"/>
+            <user name="mwilliams" 
+                password="5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8"/>
+        </credentials>
+    </forms>
+</authentication>
+
+<authorization>
+    <deny users="?" />
+</authorization>
+
+<sessionState cookieless="true"/>

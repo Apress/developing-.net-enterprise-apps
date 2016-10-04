@@ -1,0 +1,32 @@
+public void ImportDataFromXml( string strXmlData, string strFilename )
+{
+    try
+    {
+        if( strFilename != null && strFilename.Length > 0 )
+        {
+            //pull xml from file
+            System.IO.StringReader streamRead = new System.IO.StringReader( 
+                strFilename );
+
+            _AppDataComponent.ReferenceDataSet.ReadXml( streamRead, 
+                XmlReadMode.ReadSchema );
+        }
+        else
+        {
+            //pull xml from string argument
+            System.IO.StringReader readerXml = new System.IO.StringReader( 
+                strXmlData );
+
+            _AppDataComponent.ReferenceDataSet.ReadXml( readerXml, 
+                XmlReadMode.IgnoreSchema );
+        }
+    }
+    catch( Exception x )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+    }
+
+    return;
+}

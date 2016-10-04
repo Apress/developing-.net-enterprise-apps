@@ -1,0 +1,20 @@
+<Dat_Issue 
+    xmlns:issue="http://www.enterprisedotnet/xml/issue" 
+    xmlns:user="http://www.enterprisedotnet/xml/user"
+>
+    <issue:IssueID>1</issue:IssueID> 
+    <issue:TypeID>1</issue:TypeID> 
+    <issue:EntryDate>2002-08-15T00:00:00.0000000-07:00</issue:EntryDate> 
+    <issue:StatusID>1</issue:StatusID> 
+    <issue:Summary>Unable to print</issue:Summary> 
+    <issue:Description>I can not print any PowerPoint files on the //MKT-GROUP
+        printer in the lobby.</issue:Description> 
+    <issue:PriorityID>1</issue:PriorityID> 
+    <user:User>
+        <user:Firstname>Larry</user:Firstname> 
+        <user:Lastname>Dalton</user:Lastname> 
+        <user:Description>Marketing Director</user:Description>
+        <user:EmailAddress>larryd@sample.com</user:EmailAddress> 
+        <user:UserType>1</user:UserType> 
+    </user:User>
+</issue:Dat_Issue>

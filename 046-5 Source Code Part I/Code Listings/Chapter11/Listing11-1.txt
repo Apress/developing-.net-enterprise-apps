@@ -1,0 +1,37 @@
+private void menuViewIssues_Click(object sender, System.EventArgs e)
+{
+    string strResponse;
+    ListViewItem listItem;
+
+    //prepare the ListView control, initially hidden from user
+    lstViewer.Items.Clear();
+    lstViewer.Visible = true;
+
+    try
+    {
+        //create and populate a new DataSet
+        DataSet datasetIssues = new DataSet();
+        datasetIssues.ReadXml( "\\Windows\\issues.xml" );
+
+        //iterate through the rows to populate the ListView control
+        foreach( DataRow row in datasetIssues.Tables["Dat_Issue"].Rows )
+        {
+            listItem = new ListViewItem();
+
+            listItem.Text = row["IssueID"].ToString();
+            listItem.SubItems.Add( row["PriorityID"].ToString() );
+            listItem.SubItems.Add( row["Summary"].ToString() );
+
+            //add the created entry to the ListView control
+            lstViewer.Items.Add( listItem );
+        }
+
+    }
+    catch( Exception x )
+    {
+        MessageBox.Show( x.Message );
+    }
+
+    return;
+
+}

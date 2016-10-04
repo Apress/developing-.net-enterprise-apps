@@ -1,0 +1,8 @@
+<location path="Pages">
+<!-- Apply security settings to all files lccated in the 'Pages' directory -->
+    <system.web>
+        <authorization>
+            <deny users="?" />
+        </authorization>
+        </system.web>
+    </location> 

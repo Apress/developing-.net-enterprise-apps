@@ -1,0 +1,10 @@
+private void btnOK_Click(object sender, System.EventArgs e)
+{
+    User objUser = new User();
+
+    objUser = UserManager.GetUser( txtEmailAddress.Text, txtPassword.Text );
+    Session.Add( "USER_OBJECT", objUser );
+    Response.Redirect( "IssueSummary.aspx", true );
+
+    return;
+}

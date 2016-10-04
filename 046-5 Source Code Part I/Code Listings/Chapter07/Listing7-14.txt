@@ -1,0 +1,26 @@
+private void Page_Load(object sender, System.EventArgs e)
+{
+    // Put user code to initialize the page here
+    User objUser = (User)Session["USER_OBJECT"];
+
+    switch( objUser.UserRole )
+    {
+        case (int)User.UserRoleType.Administrator:
+            lnkDeleteIssue.Enabled = true;
+            goto case (int)User.UserRoleType.Manager;
+
+        case (int)User.UserRoleType.Manager:
+            lnkEditIssue.Enabled = true;
+            goto case (int)User.UserRoleType.TypicalUser;
+
+        case (int)User.UserRoleType.TypicalUser:
+            lnkNewIssue.Enabled = true;
+            lnkViewIssue.Enabled = true;
+            goto case (int)User.UserRoleType.Guest;
+
+        case (int)User.UserRoleType.Guest:
+            break;
+    }
+
+    return;
+}

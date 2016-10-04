@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<string xmlns="http://tempuri.org/"><Dat_Issue IssueID="1" TypeID="1" 
+    UserID="1" EntryDate="2002-01-01T00:00:00" StatusID="1" 
+    Summary="Unable to print. " Description="Can not print to the color laser 
+    in the copy room." PriorityID="2" ModifiedDate="2002-01-01T00:00:00" />
+</string>

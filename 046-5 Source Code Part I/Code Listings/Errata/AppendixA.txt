@@ -1,0 +1,1 @@
+Appending A, creating the IssueTracker schema has been updated, changing the primary key data type from uniqueidentifier to int. The primary reason for the data type change is application flexibility. 

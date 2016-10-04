@@ -1,0 +1,9 @@
+namespace IntegrationCommon
+{
+    public interface IIntegrationServer
+    {
+        void ProcessRequest( string strData );
+        void SendToAdapter( string strDestination, string strData );
+        void LoadConfigurationData();
+    }
+}

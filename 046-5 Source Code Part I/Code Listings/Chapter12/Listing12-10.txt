@@ -1,0 +1,12 @@
+public void LoadConfigurationData()
+{
+    AppSettingsReader settings = new AppSettingsReader();
+
+    _DirectoryWatch.Filter = (string)settings.GetValue( "FileType", 
+        typeof(string) );
+
+    _DirectoryWatch.Path = (string)settings.GetValue( "Directory", 
+        typeof(string));
+
+    return;
+}

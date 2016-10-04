@@ -1,0 +1,26 @@
+protected override void OnStart(string[] args)
+{
+    Thread listeningThread = new Thread( new ThreadStart(MessageListener) );
+    listeningThread.Start();
+ 
+    return;
+}
+
+public static void MessageListener()
+{
+    Issue objIssue = null;
+
+    MessagingFramework messagingServices = new MessagingFramework();
+    messagingServices.ProcessName = "AnalysisService";
+    messagingServices.CreateQueues();
+
+    while( true )
+    {
+        objIssue = (Issue)messagingServices.ReceiveBusinessObject();
+        //perform analysis on issue object
+
+        Thread.Sleep(1000);
+    }
+
+    return;
+}  

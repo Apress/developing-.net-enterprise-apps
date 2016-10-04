@@ -1,0 +1,9 @@
+<configuration>
+    <system.web>
+        <authentication mode="Passport"/> 
+    </system.web>
+</configuration>
+<authorization>
+    <allow users="passport_account@msn.com" />
+    <deny users="*" />
+</authorization>

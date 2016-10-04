@@ -1,0 +1,10 @@
+private void lstIssues_MouseDown( object sender,
+    System.Windows.Forms.MouseEventArgs e )
+{
+    ListViewItem itemSelected = lstIssues.SelectedItems[0];
+
+    lstIssues.DoDragDrop( itemSelected.SubItems[0].Text, 
+        System.Windows.Forms.DragDropEffects.Copy );
+
+    return;
+}

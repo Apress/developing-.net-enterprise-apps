@@ -1,0 +1,32 @@
+public DirectoryEntry ValidateLogin( string strUsername, string strPassword )
+{
+    DirectoryEntry dirResult = null;
+
+    try
+    {
+        //initialize the root seaerch object
+        DirectoryEntry dirEntry = new DirectoryEntry( "LDAP://srv-enterprise", 
+            strUsername, strPassword );
+
+        //initialize the search object
+        DirectorySearcher dirSearcher = new DirectorySearcher( dirEntry );
+
+        //set the filter to retrieve the specific user
+        dirSearcher.Filter = "(&(objectClass=user)(mail=" +strUsername+ "))";
+        dirSearcher.SearchScope = SearchScope.Subtree;
+
+        //execute the search
+        SearchResult searchResult = dirSearcher.FindOne();
+        dirResult = searchResult.GetDirectoryEntry();
+
+    }
+    catch( Exception x )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( x.Message + " for user " + strUsername, 
+            EventLogEntryType.Error, 0 );
+    }
+
+    return dirResult;
+}

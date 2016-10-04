@@ -1,0 +1,61 @@
+/*
+tr
+{
+	font-size: 11px;
+	color: #000000;
+	font-family: Arial, Verdana, Helvetica, Sans-Serif;
+}
+*/
+
+.HeaderText
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: #000000;
+	font-family: Arial, Verdana, Helvetica, Sans-Serif;
+}
+
+.FooterText
+{
+	font-size: 9px;
+	color: #000000;
+	font-family: Arial, Verdana, Helvetica, Sans-Serif;
+}
+
+.PlainText
+{
+	font-size: 11px;
+	color: #000000;
+	font-family: Arial, Verdana, Helvetica, Sans-Serif;
+}
+
+.ErrorText
+{
+	font-size: 11px;
+	color: #000000;
+	font-family: Arial, Verdana, Helvetica, Sans-Serif;
+	color: Red;
+	font-weight: bold;
+}
+
+.GreetingText
+{
+	font-weight: bold;
+	font-size: 11px;
+	color: #009900;
+	font-family: Arial, Verdana, Helvetica, Sans-Serif;
+}
+
+A
+{
+	font-size: 11px;
+	background: none transparent scroll repeat 0% 0%;
+	color: #006699;
+	font-family: Arial, Verdana, Helvetica, Sans-Serif;
+	text-decoration: none;
+}
+
+A:hover
+{
+	text-decoration: underline;
+}

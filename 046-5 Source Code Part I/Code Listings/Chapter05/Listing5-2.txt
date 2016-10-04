@@ -1,0 +1,13 @@
+public class EmailService : BusinessService
+{
+    private User _UserFrom = new User();
+    private User _UserTo = new User();
+    private User _UserCc = new User();
+    private User _UserBcc = new User();
+    private MailMessage _OutgoingMessage = new MailMessage();
+    private ArrayList _IncomingMessages = new ArrayList();
+
+    public EmailService()
+    {
+    }
+}

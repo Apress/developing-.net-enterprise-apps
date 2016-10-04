@@ -1,0 +1,33 @@
+public void ResendMessage()
+{
+    MessageQueue queueErrors = null;
+    MessageQueue queueDestination = null;
+    ArrayList messagesArray = new ArrayList();
+
+    try
+    {
+        queueErrors = new MessageQueue( _QueueErrorsName );
+        messagesArray.AddRange( queueErrors.GetAllMessages() );
+
+        foreach( Message message in messagesArray )
+        { 
+            queueDestination = message.ResponseQueue;
+            queueDestination.Send( message );
+        }
+
+        queueErrors.Purge();
+    }
+    catch( MessageQueueException exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        queueErrors.Close();
+        queueDestination.Close();
+    }
+    
+    return;
+}

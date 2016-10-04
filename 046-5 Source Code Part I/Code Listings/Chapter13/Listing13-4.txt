@@ -1,0 +1,23 @@
+private void Page_Load(object sender, System.EventArgs e)
+{
+    string strMessage = "";
+
+    if( Request.IsAuthenticated )
+    {
+        string strUsername = HttpContext.Current.User.Identity.Name;
+        strMessage = "<h2>User: " + HttpContext.Current.User.Identity.Name;
+        strMessage += "<p>Administrator: ";
+
+        if( HttpContext.Current.User.IsInRole( "Administrators" ) )
+            strMessage += "Yes";
+        else
+            strMessage +="No";
+
+        strMessage += "</h2>";
+        Response.Write( strMessage );
+    }
+    else
+        Response.Write( "<h1>Not authenticated.<h1>" );
+
+    return;
+}

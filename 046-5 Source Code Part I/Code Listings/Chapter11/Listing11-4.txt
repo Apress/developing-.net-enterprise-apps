@@ -1,0 +1,51 @@
+private void DisplayIssues()
+{
+    string strDataPath = "\\My Documents\\IssueTracker.sdf";
+    ListViewItem listItem;
+
+    //create the connection object
+    SqlCeConnection conn = new SqlCeConnection( "Data Source=" + strDataPath );
+
+    try
+    {
+        //open the device database connection
+        conn.Open();
+
+        //create and initialize the command
+        SqlCeCommand command = conn.CreateCommand();
+        command.CommandText = "SELECT IssueID, PriorityID, RTRIM(Summary) " +
+            "FROM Dat_Issues ORDER BY IssueID";
+
+        //execute the query
+        SqlCeDataReader reader = command.ExecuteReader();
+
+        //build the display list
+        lstViewer.Items.Clear();
+        while( reader.Read() )
+        {
+            //build the display list row entries
+            listItem = new ListViewItem();
+            listItem.Text = reader.GetInt32(0).ToString();
+            listItem.SubItems.Add( reader.GetInt16(1).ToString() );
+            listItem.SubItems.Add( reader.GetString(3) );
+
+            lstViewer.Items.Add( listItem );
+        }
+
+    }
+    catch( SqlCeException x )
+    {
+        MessageBox.Show( x.Message );
+    }
+    catch( Exception x )
+    {
+        MessageBox.Show( x.Message );
+    }
+    finally
+    {
+        //close the database connection
+        conn.Close();
+    }
+
+    return;
+}

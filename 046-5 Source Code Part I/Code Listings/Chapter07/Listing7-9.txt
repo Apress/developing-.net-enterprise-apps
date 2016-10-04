@@ -1,0 +1,16 @@
+public class IssueDetails : ReflectionPage //System.Web.UI.Page
+{
+    private void Page_Load(object sender, System.EventArgs e)
+    {
+        Issue myIssue = new Issue();
+        myIssue.Summary = "This is test summary text.";
+        myIssue.Description = "This is a detailed test description.";
+        myIssue.EntryDate = new DateTime();
+        myIssue.Priority = 3;
+        myIssue.TypeID = 3;
+
+        BusinessObject = myIssue;
+        
+        ReflectBusinessObject();
+    }
+}

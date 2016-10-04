@@ -1,0 +1,49 @@
+public class MessagingFramework
+{
+    private string _ProcessName = "";
+    private string _QueueInboxName = "";
+    private string _QueueOutboxName = "";
+    private string _QueueErrorsName = "";
+
+    public enum QueueType
+    {
+        Inbox = 1,
+        Outbox = 2,
+        Errors = 3
+    }
+
+    public MessagingFramework()
+    {
+        _ProcessName = "Undefined";
+        _QueueInboxName = ".\\private$\\" + _ProcessName + "Inbox";
+        _QueueOutboxName = ".\\private$\\" + _ProcessName + "Outbox";
+        _QueueErrorsName = ".\\private$\\" + _ProcessName + "Errors";
+
+        return;
+    }
+
+    public MessagingFramework( string strProcessName )
+    {
+        _ProcessName = strProcessName;
+        _QueueInboxName = ".\\private$\\" + _ProcessName + "Inbox";
+        _QueueOutboxName = ".\\private$\\" + _ProcessName + "Outbox";
+        _QueueErrorsName = ".\\private$\\" + _ProcessName + "Errors";
+
+        return;
+    }
+
+    public string ProcessName
+    {
+        get
+        {
+            return _ProcessName;
+        }
+        set
+        {
+            _ProcessName = value;
+            _QueueInboxName = ".\\private$\\" + _ProcessName + "Inbox";
+            _QueueOutboxName = ".\\private$\\" + _ProcessName + "Outbox";
+            _QueueErrorsName = ".\\private$\\" + _ProcessName + "Errors";
+        }
+    }
+}

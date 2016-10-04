@@ -1,0 +1,13 @@
+private void Page_Load(object sender, System.EventArgs e)
+{
+    if( HttpContext.Current.User.IsInRole( "Administrator" ) )
+        menuAdministrator.Visible = true;
+
+    if( HttpContext.Current.User.IsInRole( "Manager" ) )
+        menuManager.Visible = true;
+
+    if( HttpContext.Current.User.IsInRole( "All" ) )
+        menuAll.Visible = true;
+
+    return;
+}

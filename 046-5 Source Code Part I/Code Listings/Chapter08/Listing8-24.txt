@@ -1,0 +1,22 @@
+private void FormMain_Closing( object sender, 
+    System.ComponentModel.CancelEventArgs e )
+{
+    //save the window state
+    String strPath = "Software\\IssueTracker\\Settings";
+    String strWindowState = "";
+
+    RegistryKey  regkeyAppRoot = Registry.CurrentUser.CreateSubKey( strPath );
+
+    if( WindowState == FormWindowState.Maximized )
+        strWindowState = "Maximized";
+
+    else if( WindowState == FormWindowState.Minimized )
+        strWindowState = "Minimized";
+
+    else
+        strWindowState = "Normal";
+
+    regkeyAppRoot.SetValue( "WindowState", strWindowState );
+
+    return;
+}

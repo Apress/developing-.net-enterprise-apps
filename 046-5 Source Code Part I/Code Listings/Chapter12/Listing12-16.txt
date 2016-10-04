@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<DemoDat 
+    xmlns:xsl='http://www.w3.org/1999/XSL/Transform' 
+    xsl:version='1.0' >
+
+    <Issues>
+        <xsl:if test='/DemoDat/Table/ID &lt; 1'>
+            <xsl:text>INVALID ID</xsl:text>
+        </xsl:if>
+
+        <Severity>
+            <xsl:choose>
+                <xsl:when test='(/DemoDat/Table/Severity) = 1'>
+                    <xsl:text>Important</xsl:text>
+                </xsl:when>
+                <xsl:when test='(/DemoDat/Table/Severity) = 2'>
+                    <xsl:text>Mild</xsl:text>
+                </xsl:when>
+                <xsl:when test='(/DemoDat/Table/Severity) = 3'>
+                    <xsl:text>Unimportant</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>Unknown</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </Severity>
+    </Issues>
+</DemoDat>

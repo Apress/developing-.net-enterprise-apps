@@ -1,0 +1,35 @@
+private void FormViewIssue_Load( object sender, System.EventArgs e )
+{
+    try
+    {
+        IssueCollection issues = "";
+
+        //instantiate the Web service proxy
+        net.mynamespace.www.IssueServices wsIssues = 
+            new net.mynamespace.www.IssueServices();
+
+        //invoke the Web service method
+        issues = wsIssues.GetAllIssues();
+
+        if( strWebServiceResponse.StartsWith( "ERR" ) == false )
+        {
+            foreach( Issue objIssue in issues )
+            {
+                lstIssues.Items.Add( "[" + objIssue.IssueID + "]" +
+                    objIssue.Summary.Substring(0,10) + "..." );
+            }
+        }
+        else
+        {
+            System.Windows.Forms.MessageBox.Show( "Login Failed." );
+        }
+
+    }
+    catch( Exception x )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+    }
+    return;
+}

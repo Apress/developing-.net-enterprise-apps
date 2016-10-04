@@ -1,0 +1,58 @@
+public bool SelectAll( BusinessObjectCollection objSource )
+{
+    bool boolStatus = false;
+    string strObject;
+    string strStoredProc;
+    SqlParameter parameter;
+    SqlCommand command;
+
+    try
+    {
+        //get the object name
+        Type objType = objSource.GetType();
+        strObject = objType.FullName.Substring( objType.FullName.IndexOf(".")+1);
+        strObject = strObject.Replace( "Collection", "" );
+
+        //get the stored procedure name
+        strStoredProc = "app_";
+        strStoredProc += strObject;
+        strStoredProc += "SelectAll";
+
+        //initialize the command
+        command = new SqlCommand( strStoredProc, dataComponent.Connection );
+        command.CommandType = CommandType.StoredProcedure;
+
+        //open the connection and execute query
+        dataComponent.Connection.Open();
+        SqlDataReader reader = command.ExecuteReader();
+
+        while( reader.Read() )
+        {
+            BusinessObject newObject = objSource.New();
+            objType = newObject.GetType();
+
+            for( int intIndex = 0; intIndex < reader.FieldCount; intIndex++ )
+            {
+                string strColName = reader.GetName( intIndex );
+                PropertyInfo field = objType.GetProperty( strColName );
+                field.SetValue( objSource, reader.GetValue( intIndex ), null );
+            }
+
+            objSource.Add( newObject );
+        }
+
+        boolStatus = true;
+    }
+    catch( Exception exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        dataComponent.Connection.Close();
+    }
+
+    return boolStatus;
+}

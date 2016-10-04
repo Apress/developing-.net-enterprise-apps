@@ -1,0 +1,14 @@
+private void FormIssueDetails_Load(object sender, System.EventArgs e)
+{
+    IssueManager managerIssue = new IssueManager();
+    Issue issue = managerIssue.GetIssue( m_intIssueID );
+
+    txtEntryDate.DataBindings.Add( "Text", issue, "EntryDate" );
+    cboType.DataBindings.Add( "Text", issue, "TypeID" );
+    cboStatus.DataBindings.Add( "Text", issue, "StatusID" );
+    cboPriority.DataBindings.Add( "Text", issue, "PriorityID" );
+    txtSummary.DataBindings.Add( "Text", issue, "Summary" );
+    txtDescription.DataBindings.Add( "Text", issue, "Description" );
+
+    return;
+}

@@ -1,0 +1,24 @@
+private void Page_Load(object sender, System.EventArgs e)
+{
+    try
+    {
+        DataAccess.DataAccessComponent data = new 
+            DataAccess.DataAccessComponent();
+
+        lstType.DataSource = data.GetDataSetIssueTracker().Val_IssueType;
+        lstType.DataBind();
+
+        lstPriority.DataSource = data.GetDataSetIssueTracker().Val_Priority;
+        lstPriority.DataBind();
+
+        lstStatus.DataSource = data.GetDataSetIssueTracker().Val_Status;
+        lstStatus.DataBind();
+    }
+    catch( Exception x )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+    }
+    return;
+}

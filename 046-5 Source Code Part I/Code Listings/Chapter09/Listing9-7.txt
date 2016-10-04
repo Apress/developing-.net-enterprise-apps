@@ -1,0 +1,18 @@
+[WebMethod(EnableSession=true)]
+public string ValidateLogin( string strEmailAddress, string strPassword )
+{
+    //validate login by getting the user data
+    User objUser = UserManager.GetUser( strEmailAddress, strPassword );
+
+    if( objUser != null )
+    {
+        //if successful, return the key
+        if( Session[strEmailAddress] == null )
+            Session[strEmailAddress] = 1;
+
+        return Session.SessionID;
+    }
+
+    //if not successful, return error message
+    return "ERR: Unable to validate login.";
+}

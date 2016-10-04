@@ -1,0 +1,33 @@
+public class DatabaseAdapterService  : System.ServiceProcess.ServiceBase, 
+IntegrationCommon.IIntegrationAdapter
+{
+
+    private void LoadConfigurationData()
+    {
+        return;
+    }
+
+    public string ReadRecord( int intRecordID )
+    {
+        return null;
+    }
+
+    public string ReadAllRecords()
+    {
+        return null;
+    }
+
+    public bool WriteRecords( string strData )
+    {
+        return false;
+    }
+
+    private string SendToServer( string strData )
+    {
+        return null;
+    }
+
+    #region Visual Studio .NET generated Windows service code
+    //...
+    #endregion
+}

@@ -1,0 +1,44 @@
+private void SynchronizeSqlDatabase()
+{
+    //specify the location of the local device database
+    string strDataPath = "\\My Documents\\IssueTracker.sdf";
+
+    //create the data replication object
+    SqlCeReplication replication = new SqlCeReplication();
+
+    try
+    {
+        //define the source of the replication data
+        replication.Publisher = "server_name";
+        replication.PublisherDatabase = "IssueTracker"; //database name
+        replication.Publication = "IssueTrackerPublication";
+
+        //define the login credentials
+        replication.PublisherLogin = "sa";
+        replication.PublisherPassword = "";
+
+        //define the subscriber-side connection string
+        replication.SubscriberConnectionString = 
+            "Provider=Microsoft.SQLServer.OLEDB.CE.2.0;"  +
+            "Data Source=" + strDataPath;
+
+        replication.Subscriber = "iPAQ Mobile Device";
+
+        //define the location of the IIS replication service agent
+        replication.InternetUrl = "http://jkanalakis/sqlce/ssceca20.dll";
+
+        //define the replication mode and begin the process
+        replication.ExchangeType = ExchangeType.BiDirectional;
+        replication.Synchronize();
+    }
+    catch( SqlCeException x )
+    {
+        MessageBox.Show( x.Message );
+    }
+    catch( Exception x )
+    {
+        MessageBox.Show( x.Message );
+    }
+
+    return;
+}

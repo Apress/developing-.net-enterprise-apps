@@ -1,0 +1,18 @@
+public class UserManager
+{
+    private UserObjectManager _ObjectManager = new UserObjectManager();
+
+    public UserManager()
+    {
+    }
+
+    public User GetUser( string strEmailAddress, string strPassword )
+    {
+        User objUser = null;
+
+        objUser = _ObjectManager.ValidateLoginWithProfile( strEmailAddress, 
+            strPassword );
+
+        return objUser;
+    }
+}

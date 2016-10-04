@@ -1,0 +1,32 @@
+<portType name="LoginServicesSoap">
+    <operation name="ValidateLogin">
+        <input message="s0:ValidateLoginSoapIn" /> 
+        <output message="s0:ValidateLoginSoapOut" /> 
+    </operation>
+    <operation name="CheckKey">
+        <input message="s0:CheckKeySoapIn" /> 
+        <output message="s0:CheckKeySoapOut" /> 
+    </operation>
+</portType>
+
+<portType name="LoginServicesHttpGet">
+    <operation name="ValidateLogin">
+        <input message="s0:ValidateLoginHttpGetIn" /> 
+        <output message="s0:ValidateLoginHttpGetOut" /> 
+    </operation>
+    <operation name="CheckKey">
+        <input message="s0:CheckKeyHttpGetIn" /> 
+        <output message="s0:CheckKeyHttpGetOut" /> 
+    </operation>
+</portType>
+
+<portType name="LoginServicesHttpPost">
+    <operation name="ValidateLogin">
+        <input message="s0:ValidateLoginHttpPostIn" /> 
+        <output message="s0:ValidateLoginHttpPostOut" /> 
+    </operation>
+    <operation name="CheckKey">
+        <input message="s0:CheckKeyHttpPostIn" /> 
+        <output message="s0:CheckKeyHttpPostOut" /> 
+    </operation>
+</portType>

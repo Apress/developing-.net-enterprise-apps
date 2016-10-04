@@ -1,0 +1,23 @@
+public void CreateKey( string strPassword, int intSize, ref byte[] byteKey, 
+    ref byte[] byteIV )
+{
+    int intIndex;
+    byte[] byteData;
+    byte[] byteHash;
+
+    byteData = Encoding.ASCII.GetBytes( strPassword );
+
+    SHA1CryptoServiceProvider providerCrypto = new SHA1CryptoServiceProvider();
+
+    int intLength = intSize / 8;
+
+    byteHash = providerCrypto.ComputeHash( byteData );
+
+    for( intIndex = 0; intIndex < intLength; intIndex++ )
+        byteKey[intIndex] = byteHash[intIndex];
+
+    for( intIndex = intLength; intIndex < (2 * intLength); intIndex++ )
+        byteIV[intIndex - intLength] = byteHash[intIndex];
+
+    return;
+}

@@ -1,0 +1,49 @@
+public string ReadRecord( int intRecordID )
+{
+    string stroutput = null;
+    XmlReader reader = null;
+    SqlConnection connection = null;
+    SqlParameter parameter = null;
+    SqlCommand command = null;
+
+    try
+    {
+        //later, connection string is retrieved from a configuration file
+        connection = new SqlConnection( 
+            "workstation id=MONTEREY;packet size=4096;user id=sa;data " + 
+            "source=MONTEREY;persist security info=False;" + 
+            "initial catalog=DemoApp" );
+
+        connection.Open();
+
+        command = new SqlCommand( "adapter_ReadRecord", connection );
+        command.CommandType = CommandType.StoredProcedure;
+
+        //add the ID parameter
+        parameter = new SqlParameter( "@ID", SqlDbType.Int );
+        parameter.Direction = ParameterDirection.Input;
+        parameter.Value = intRecordID;
+        command.Parameters.Add( parameter );
+
+        reader = command.ExecuteXmlReader();
+        reader.MoveToContent();
+
+        stroutput = reader.ReadOuterXml();
+    }
+    catch( Exception x )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "Integration Adapter";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+        systemLog.Dispose();
+    }
+    finally
+    {
+        reader.Close();
+        connection.Close();
+        connection.Dispose();
+        command.Dispose();
+    }
+
+    return SendToServer( stroutput );
+}

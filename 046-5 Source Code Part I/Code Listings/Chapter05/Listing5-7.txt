@@ -1,0 +1,59 @@
+public User SendTo
+{
+        get
+        {
+            return _UserTo;
+        }
+        set
+        {
+            _UserTo = value;
+        }
+}
+
+public User SendCc
+{
+    get
+    {
+        return _UserCc;
+    }
+    set
+    {
+        _UserCc = value;
+    }
+}
+
+public User SendBcc
+{
+    get
+    {
+        return _UserBcc;
+    }
+    set
+    {
+        _UserBcc = value;
+    }
+}
+
+public User SentFrom
+{
+    get
+    {
+        return _UserFrom;
+    }
+    set
+    {
+        _UserFrom = value;
+    }
+}
+
+public MailMessage OutgoingMessage
+{
+    get
+    {
+        return _OutgoingMessage;
+    }
+    set
+    {
+        _OutgoingMessage = value;
+    }
+}

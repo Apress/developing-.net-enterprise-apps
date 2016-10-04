@@ -1,0 +1,10 @@
+[WebMethod(EnableSession=true)]
+public string CheckKey( string strKey )
+{
+    //determine if key is still valid
+    if( Session.SessionID.CompareTo( strKey ) == 0 )
+        return "OK: The Key is still valid.";
+
+    else
+        return "ERR: The Key is not valid.";
+}

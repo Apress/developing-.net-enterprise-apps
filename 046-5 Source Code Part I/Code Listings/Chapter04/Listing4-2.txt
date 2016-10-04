@@ -1,0 +1,26 @@
+public void CreateQueues()
+{
+    try
+    {
+        //create the inbox queue
+        if( ! MessageQueue.Exists( _QueueInboxName ) )
+            MessageQueue.Create( _QueueInboxName );
+
+        //create the outbox queue
+        if( ! MessageQueue.Exists( _QueueOutboxName ) )
+            MessageQueue.Create( _QueueOutboxName );
+
+        //create the errors queue
+        if( ! MessageQueue.Exists( _QueueErrorsName ) )
+            MessageQueue.Create( _QueueErrorsName );
+
+    }
+    catch( MessageQueueException exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+
+    return;
+}

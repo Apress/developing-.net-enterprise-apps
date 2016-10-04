@@ -1,0 +1,43 @@
+private void FormViewIssue_Load( object sender, System.EventArgs e )
+{
+    try
+    {
+        //instantiate the Web service proxy
+        IssueService.IssueServices webserviceIssue =
+            new IssueService.IssueServices();
+
+        //invoke the Web service method
+        string strResponse = webserviceIssue.GetSpecificIssue( m_strPassword,
+            m_longIssueID );
+
+        //initialize a new DataSet
+        DataSet dsIssue = new DataSet();
+
+        //initialize an XmlTextReader with the Web service results
+        XmlTextReader xreader = new XmlTextReader( strResponse,
+            XmlNodeType.Element, null );
+
+        //feed the Web service response to the DataSet
+        dsIssue.ReadXml( xreader );
+
+        //Set the display fields based on values within the DataSet
+        lblPriority.Text = 
+            dsIssue.Tables["Dat_Issue"].Rows[0]["PriorityLabel"].ToString();
+        lblType.Text =
+            dsIssue.Tables["Dat_Issue"].Rows[0]["TypeLabel"].ToString();
+        txtSummary.Text =
+            dsIssue.Tables["Dat_Issue"].Rows[0]["Summary"].ToString();
+        lblAuthor.Text =
+            dsIssue.Tables["Dat_Issue"].Rows[0]["Lastname"].ToString().Trim() +
+            ", " + 
+            dsIssue.Tables["Dat_Issue"].Rows[0]["Firstname"].ToString().Trim();
+        txtDescription.Text = 
+            dsIssue.Tables["Dat_Issue"].Rows[0]["Description"].ToString();
+    }
+    catch( Exception x )
+    {
+        MessageBox.Show( x.Message );
+    }
+
+    return;
+}

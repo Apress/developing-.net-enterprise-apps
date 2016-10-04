@@ -1,0 +1,76 @@
+<binding name="LoginServicesSoap" type="s0:LoginServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" 
+        style="document" /> 
+
+    <operation name="ValidateLogin">
+        <soap:operation soapAction="http://tempuri.org/ValidateLogin"
+            style="document" /> 
+        <input>
+            <soap:body use="literal" /> 
+        </input>
+        <output>
+            <soap:body use="literal" /> 
+        </output>
+    </operation>
+
+    <operation name="CheckKey">
+        <soap:operation soapAction="http://tempuri.org/CheckKey"
+            style="document" /> 
+        <input>
+            <soap:body use="literal" /> 
+        </input>
+        <output>
+            <soap:body use="literal" /> 
+        </output>
+    </operation>
+
+</binding>
+
+<binding name="LoginServicesHttpGet" type="s0:LoginServicesHttpGet">
+    <http:binding verb="GET" /> 
+
+    <operation name="ValidateLogin">
+        <http:operation location="/ValidateLogin" /> 
+        <input>
+            <http:urlEncoded /> 
+        </input>
+        <output>
+            <mime:mimeXml part="Body" /> 
+        </output>
+    </operation>
+
+    <operation name="CheckKey">
+        <http:operation location="/CheckKey" /> 
+        <input>
+            <http:urlEncoded /> 
+        </input>
+        <output>
+            <mime:mimeXml part="Body" /> 
+        </output>
+    </operation>
+
+</binding>
+<binding name="LoginServicesHttpPost" type="s0:LoginServicesHttpPost">
+    <http:binding verb="POST" /> 
+
+    <operation name="ValidateLogin">
+        <http:operation location="/ValidateLogin" /> 
+        <input>
+            <mime:content type="application/x-www-form-urlencoded" /> 
+        </input>
+        <output>
+            <mime:mimeXml part="Body" /> 
+        </output>
+    </operation>
+
+    <operation name="CheckKey">
+        <http:operation location="/CheckKey" /> 
+        <input>
+            <mime:content type="application/x-www-form-urlencoded" /> 
+        </input>
+        <output>
+            <mime:mimeXml part="Body" /> 
+        </output>
+    </operation>
+
+</binding>

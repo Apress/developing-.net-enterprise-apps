@@ -1,0 +1,29 @@
+//import a method from an unmanaged dll
+[DllImport("coredll.dll")]
+private static extern int LoadCursor(int zeroValue, int cursorID );
+
+//import a method from an unmanaged dll
+[DllImport("coredll.dll")]
+private static extern int SetCursor( int cursorHandle );
+
+// show or hide the wait cursor
+public void ShowWaitCursor( bool boolShowWait )
+{
+    try
+    {
+        int cursorHandle = 0;
+
+        if( boolShowWait )
+        {
+            //load the busy cursor
+            cursorHandle = LoadCursor( 0, 32514 );
+        }
+
+        SetCursor( cursorHandle );
+    }
+    catch( Exception x )
+    {
+        MessageBox.Show( "Unable to set cursor." );
+    }
+    return;
+}

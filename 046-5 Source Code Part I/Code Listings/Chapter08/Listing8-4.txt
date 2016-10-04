@@ -1,0 +1,6 @@
+private void FormMain_Load( object sender, System.EventArgs e )
+{
+    IssueCollection myColl = new IssueCollection();
+    Controller.Process( myColl, Controller.ControllerActions.View );
+    return;
+}

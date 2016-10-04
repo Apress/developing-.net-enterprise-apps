@@ -1,0 +1,28 @@
+public static void Process( object argObject, ControllerActions argAction )
+{
+    //based on mapping, display specific form
+    foreach( ObjectMappingEntry objMapping in _ObjectMappings )
+    {
+        //find the right business object
+        if( argObject.GetType().Name.CompareTo( 
+            objMapping.BusinessObjectName ) == 0 )
+        {
+            //find the right action
+            if( objMapping.Action == argAction )
+            {
+                Assembly asm = Assembly.Load( objMapping.Viewer.Substring( 0,
+                    objMapping.Viewer.IndexOf( '.' ) ) );
+
+                Type typeViewer = asm.GetType( objMapping.Viewer );
+
+                FrameworkViewer formViewer = 
+                    (FrameworkViewer)Activator.CreateInstance( typeViewer );
+
+                formViewer.MdiParent = _ParentForm;
+                formViewer.Show();
+            }
+        }
+    }
+
+    return;
+}

@@ -1,0 +1,34 @@
+using System;
+using System.Runtime.InteropServices;
+
+public class SoundLayer
+{
+    //specify the bitwise control flags
+    [Flags]
+    public enum AudioBitFlags : int
+    {
+        FILENAME = 0x00020000,
+        ASYNC = 0x0001
+    }
+
+    //import a method from an unmanaged dll
+    [DllImport("coredll")]
+    private static extern bool PlaySound( string szSound, IntPtr hMod,
+        AudioBitFlags flags );
+
+    //abstract the external function with an exposed static play method
+    public static void Play( string strFilename )
+    {
+        try
+        {
+            PlaySound( strFilename, IntPtr.Zero, 
+                AudioBitFlags.FILENAME | AudioBitFlags.ASYNC );
+        }
+        catch( Exception x )
+        {
+            MessageBox.Show( "Unable to playback sound file." );
+        }
+        return;
+    }
+
+}

@@ -1,0 +1,13 @@
+private void Page_Load(object sender, System.EventArgs e)
+{
+    try
+    {
+        User objUser = (User)Session["USER_OBJECT"];
+        lblGreeting.Text = "Welcome to IssueTracker, " + objUser.Firstname;
+    }
+    catch( Exception x )
+    {
+    }
+
+    return;
+}

@@ -1,0 +1,49 @@
+public bool DatabaseAuthenticate( string strUsername, string strPassword )
+{
+    SqlCommand command;
+    SqlParameter parameter;
+    bool boolAuthenticated = false;
+
+    //open connection
+    SqlConnection conn = new SqlConnection( "server=jkanalakis;" +
+        "database=IssueTracker;uid=sa;pwd=" );
+
+    try
+    {
+        conn.Open( );
+
+        //initialize the command
+        command = new SqlCommand( "app_ValidateLogin", conn );
+        command.CommandType = CommandType.StoredProcedure;
+
+        //add the email address parameter
+        parameter = new SqlParameter( "@EmailAddress", SqlDbType.Char );
+        parameter.Direction = ParameterDirection.Input;
+        parameter.Value = strUsername;
+        command.Parameters.Add( parameter );
+
+        //add the password parameter
+        parameter = new SqlParameter( "@Password", SqlDbType.Char );
+        parameter.Direction = ParameterDirection.Input;
+        parameter.Value = strPassword;
+        command.Parameters.Add( parameter );
+
+        //execute query
+        if( (int)command.ExecuteScalar() > 0 )
+            boolAuthenticated = true;
+
+    }
+    catch( Exception x )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        conn.Close();
+        conn.Dispose();
+    }
+
+    return boolAuthenticated;
+}

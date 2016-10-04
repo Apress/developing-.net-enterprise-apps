@@ -1,0 +1,9 @@
+private void btnLogin_Click(object sender, System.EventArgs e)
+{
+    if( DatabaseAuthenticate( edtEmail.Text, edtPassword.Text ) )
+        FormsAuthentication.RedirectFromLoginPage( edtEmail.Text, false );
+    else
+        lblWarning.Visible = true;
+
+    return;
+}

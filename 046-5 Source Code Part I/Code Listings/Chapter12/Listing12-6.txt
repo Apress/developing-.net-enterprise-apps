@@ -1,0 +1,40 @@
+public string ReadAllRecords()
+{
+    string strOutput = "";
+    OleDbConnection connection = null;
+    OleDbDataAdapter adapter = null;
+    DataSet datasetFileData = null;
+
+    try
+    {
+        connection = new OleDbConnection(
+            "Provider=Microsoft.Jet.OLEDB.4.0;" +
+            "Data Source=" + "c:\\" + ";" +
+            "Extended Properties=\"text;HDR=YES;FMT=Delimited\"" );
+
+        adapter = new OleDbDataAdapter( "select ID, SubmittedOn, Priority, " +
+            "Severity, Condition, ShortDescription, ComposedBy from " +
+            "appdemo.csv", connection );
+
+        datasetFileData = new DataSet( "DemoDat" );
+
+        adapter.Fill( datasetFileData );
+        strOutput = datasetFileData.GetXml();
+    }
+    catch( Exception x )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "Integration Adapter";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+        systemLog.Dispose();
+    }
+    finally
+    {
+        connection.Close();
+        connection.Dispose();
+        adapter.Dispose();
+        datasetFileData.Dispose();
+    }
+
+    return SendToServer( strOutput );
+}

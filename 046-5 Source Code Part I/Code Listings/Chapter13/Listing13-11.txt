@@ -1,0 +1,28 @@
+private void Page_Load(object sender, System.EventArgs e)
+{
+    int intDefault = -1;
+    int intTimeWindow = 7200;
+    bool boolForceLogin = false;
+    string strSrvPath = "http://" + Request.Url.Host + Request.Url.AbsolutePath;
+
+    PassportIdentity passport = new PassportIdentity();
+
+    if( passport.GetFromNetworkServer )
+        Response.Redirect( strSrvPath );
+
+    if( passport.GetIsAuthenticated( intTimeWindow, boolForceLogin, false ) )
+        lblStatus.Text = "Click 'Sign Out' to logout.";
+
+    else if( passport.HasTicket )
+        passport.LoginUser( HttpUtility.UrlEncode( strSrvPath ), 
+        intTimeWindow, boolForceLogin, null, intDefault, null, intDefault, 
+        false, null );
+    else
+        lblStatus.Text = "Click 'Sign In' to get started.";
+
+    lblPassportBtn.Text = passport.LogoTag2( HttpUtility.UrlEncode( strSrvPath ),
+        intTimeWindow, boolForceLogin, null, intDefault, false, null, intDefault,
+        false );
+
+    return;
+}

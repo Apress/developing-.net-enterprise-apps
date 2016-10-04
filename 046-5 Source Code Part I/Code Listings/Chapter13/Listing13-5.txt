@@ -1,0 +1,15 @@
+<authentication mode="Forms">
+    <forms name=".ASPXAUTH" loginUrl="pages/app_login.aspx" 
+        protection="Encryption" timeout="30">
+        <credentials passwordFormat="Clear">
+            <user name="John" password="openup" />
+        </credentials>
+    </forms>
+</authentication>
+<location path="Pages">
+    <system.web>
+        <authorization>
+            <deny users="*" />
+        </authorization>
+    </system.web>
+</location>

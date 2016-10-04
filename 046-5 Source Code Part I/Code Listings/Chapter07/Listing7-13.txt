@@ -1,0 +1,25 @@
+public string Validate()
+{
+    string strErrorMessage = "";
+
+    if( _TypeID == 0 )
+        strErrorMessage += "Issue Type is not set. ";
+
+    if( _StatusID == 0 )
+        strErrorMessage += "Issue Status is not set. ";
+
+    if( _PriorityID == 0 )
+        strErrorMessage += "Issue Priority is not set. ";
+
+    if( _Summary.Length == 0 )
+        strErrorMessage += "Issue Summary has no value. ";
+    if( _Summary.Length > 64 )
+        strErrorMessage += "Issue Summary is too long. ";
+
+    if( _Description.Length == 0 )
+        strErrorMessage += "Issue Description has no value. ";
+    if( _Description.Length > 64 )
+        strErrorMessage += "Issue Description is too long. ";
+
+    return strErrorMessage;
+}

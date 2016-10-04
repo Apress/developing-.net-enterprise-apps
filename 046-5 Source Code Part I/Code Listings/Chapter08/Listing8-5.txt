@@ -1,0 +1,7 @@
+private void listView1_DoubleClick(object sender, System.EventArgs e)
+{
+    Issue myIssue = new Issue();
+    myIssue.IssueID = 101;
+
+    Controller.Process( myIssue, Controller.ControllerActions.View );
+}

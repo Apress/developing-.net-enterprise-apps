@@ -1,0 +1,37 @@
+public User GetUserProfile( DirectoryEntry entryUser )
+{
+    User objUser = new User();
+
+    try
+    {
+        //extract default user attributes
+        objUser.Firstname = entryUser.Properties["givenName"][0].ToString();
+        objUser.Lastname = entryUser.Properties["sn"][0].ToString();
+        objUser.EmailAddress = entryUser.Properties["mail"][0].ToString();
+
+        //extract application specific user attribute
+        if( entryUser.Properties["memberOf"][0].ToString().IndexOf( 
+            "IssueTrackerUser" ) > 0 )
+            objUser.UserRole = (int)User.UserRoleType.TypicalUser;
+
+        if( entryUser.Properties["memberOf"][0].ToString().IndexOf( 
+            "IssueTrackerManager" ) > 0 )
+            objUser.UserRole = (int)User.UserRoleType.Manager;
+
+        if( entryUser.Properties["memberOf"][0].ToString().IndexOf( 
+            "IssueTrackerAdministrator" ) > 0 )
+            objUser.UserRole = (int)User.UserRoleType.Administrator;
+
+    }
+    catch( Exception x )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+    }
+
+    return objUser;
+}

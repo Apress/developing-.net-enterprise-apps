@@ -1,0 +1,21 @@
+private void btnOK_Click(object sender, System.EventArgs e)
+{
+    string strWebServiceResponse = "";
+
+    net.mynamespace.www.LoginServices wsLogin = 
+        new net.mynamespace.www.LoginServices();
+
+    strWebServiceResponse = wsLogin.ValidateLogin( edtEmail.Text, 
+        edtPassword.Text );
+
+    if( strWebServiceResponse.StartsWith( "ERR" ) == false )
+    {
+        m_strAccessKey = strWebServiceResponse;
+        m_boolLoggedIn = true;
+        Close();
+    }
+    else
+        System.Windows.Forms.MessageBox.Show( "Login Failed." );
+
+    return;
+}

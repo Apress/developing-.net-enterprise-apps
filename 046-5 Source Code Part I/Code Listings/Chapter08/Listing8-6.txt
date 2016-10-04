@@ -1,0 +1,12 @@
+private void FormIssueSummary_Load(object sender, System.EventArgs e)
+{
+    IssueManager mgrIssues = new IssueManager();
+    IssueCollection collIssues = mgrIssues.GetAllIssues();
+
+    foreach( Issue issueItem in collIssues )
+    {
+        listView1.Items.Add( issueItem.Summary );
+    }
+
+    return;
+}

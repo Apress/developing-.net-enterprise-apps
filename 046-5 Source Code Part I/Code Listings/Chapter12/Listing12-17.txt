@@ -1,0 +1,42 @@
+public void ProcessRequest( string strData )
+{
+    string strOutput = "";
+    System.IO.StringWriter sWriter = null;
+
+    try
+    {
+        strData.Replace( "\r", "" );
+        strData.Replace( "\n", "" );
+
+        //initialize the source document
+        XmlDataDocument xmlDoc = new XmlDataDocument();
+        xmlDoc.LoadXml( strData );
+
+        //initialize the transformation engine
+        XslTransform xslTransformer = new XslTransform();
+        xslTransformer.Load( "c:\\transformation.xsl" );
+             
+        //initialize the output string writer
+        sWriter = new System.IO.StringWriter();
+
+        //transform the document
+        xslTransformer.Transform( xmlDoc, null, sWriter );
+
+        //forward the response to the destination adapter
+        strOutput = sWriter.GetStringBuilder().ToString();
+        SendToAdapter( "http://127.0.0.1:3202", strOutput );
+    }
+    catch( Exception x )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+        systemLog.Dispose();
+    }
+    finally
+    {
+        sWriter.Close();
+    }
+
+    return;
+}

@@ -1,0 +1,25 @@
+private void timerMain_Tick(object sender, System.EventArgs e)
+{
+    String strDateOutput = "";
+    DateTime dateNow = DateTime.Now;
+
+    // Sets the CurrentCulture property to U.S. English.
+    Thread.CurrentThread.CurrentCulture = new CultureInfo( "en-US" );
+
+    // Displays dt, formatted using the ShortDatePattern
+    // and the CurrentThread.CurrentCulture.
+    strDateOutput = dateNow.ToString( "d" );
+      
+    // Creates a CultureInfo for German in Germany.
+    CultureInfo cultureinfo = new CultureInfo( "de-DE" );
+
+    // Displays dt, formatted using the ShortDatePattern
+    // and the CultureInfo.
+    strDateOutput += " [";
+    strDateOutput += dateNow.ToString( "d", cultureinfo );
+    strDateOutput += "]";
+
+    statusbarMain.Panels[0].Text = strDateOutput;
+
+    return;
+}

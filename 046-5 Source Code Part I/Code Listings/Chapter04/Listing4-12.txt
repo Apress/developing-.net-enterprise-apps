@@ -1,0 +1,37 @@
+public void SendMessage( string strTargetProcess, string strSubject, 
+    string strBody, int intMaxWaitSeconds )
+{
+    string strTargetQueueName;
+    string strTargetErrorsQueueName;
+
+    try
+    {
+        strTargetQueueName = ".\\private$\\" + strTargetProcess + "Inbox";
+        strTargetErrorsQueueName = ".\\private$\\" + strTargetProcess + "Errors";
+
+        if( MessageQueue.Exists( strTargetQueueName ) )
+        {
+            MessageQueue queue = new MessageQueue( strTargetQueueName );
+            MessageQueue queueErrors = 
+                new MessageQueue( strTargetErrorsQueueName );
+
+            Message message = new Message();
+            message.Label = strSubject;
+            message.Body = strBody;
+            message.TimeToBeReceived = new TimeSpan( 0, 0, intMaxWaitSeconds );
+
+            message.AdministrationQueue = queueErrors;
+            message.AcknowledgeType = AcknowledgeTypes.NegativeReceive;
+
+            queue.Send( message );
+        }
+    }
+    catch( MessageQueueException exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+
+    return;
+}

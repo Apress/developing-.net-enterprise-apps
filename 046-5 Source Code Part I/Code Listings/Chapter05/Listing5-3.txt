@@ -1,0 +1,26 @@
+public void SendMessage()
+{
+    try
+    {
+        //assign 'to' user
+        _OutgoingMessage.To = _UserTo.EmailAddress;
+
+        //assign 'cc' user
+        _OutgoingMessage.Cc = _UserCc.EmailAddress;
+
+        //assign 'bcc' user
+        _OutgoingMessage.Bcc = _UserBcc.EmailAddress;
+
+        //assign the 'from' user
+        _OutgoingMessage.From = _UserFrom.EmailAddress;
+
+        SmtpMail.SmtpServer = "localhost";
+        SmtpMail.Send( _OutgoingMessage );
+    }
+    catch( Exception x )
+    {
+        LogEvent( x.Message );
+    }
+
+    return;
+}

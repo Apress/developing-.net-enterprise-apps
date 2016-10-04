@@ -1,0 +1,10 @@
+CREATE PROCEDURE [dbo].[adapter_ReadRecord]
+(
+    @ID int
+)
+AS
+SET NOCOUNT ON;
+
+SELECT ID, SubmittedOn, Priority, Severity, Condition, ShortDescription,
+LongDescription, ComposedBy FROM DemoDat WHERE ID = @ID FOR XML AUTO;
+GO

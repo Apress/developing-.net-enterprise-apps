@@ -1,0 +1,23 @@
+public class IssueDetails : System.Web.UI.Page
+{
+    ReferenceDataManager _DataManager = new ReferenceDataManager();
+
+    private void Page_Load(object sender, System.EventArgs e)
+    {
+        Issue_TypeID.DataSource = _DataManager.GetIssueTypes();
+        Issue_TypeID.DataTextField = "TypeLabel";
+        Issue_TypeID.DataValueField = "TypeID";
+
+        Issue_StatusID.DataSource = _DataManager.GetStatuses();
+        Issue_StatusID.DataTextField = "StatusLabel";
+        Issue_StatusID.DataValueField = "StatusID";
+
+        Issue_PriorityID.DataSource = _DataManager.GetPriorities();
+        Issue_PriorityID.DataTextField = "PriorityLabel";
+        Issue_PriorityID.DataValueField = "PriorityID";
+
+        Page.DataBind();
+
+        return;
+    }
+}

@@ -1,0 +1,32 @@
+public string ExportDataToXml( string strFilename )
+{
+    string strXmlData = "";
+
+    try
+    {
+        //check to see if filename is valid
+        if( strFilename != null && strFilename.Length > 0 )
+        {
+            System.IO.StreamWriter streamWrite = 
+                new System.IO.StreamWriter( strFilename );
+
+            _AppDataComponent.ReferenceDataSet.WriteXml( streamWrite, 
+                XmlWriteMode.WriteSchema );
+
+            streamWrite.Close();
+        }
+        else
+        {
+            //return xml output as a string
+            strXmlData = _AppDataComponent.ReferenceDataSet.GetXml();
+        }
+    }
+    catch( Exception x )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+    }
+
+    return strXmlData;
+}

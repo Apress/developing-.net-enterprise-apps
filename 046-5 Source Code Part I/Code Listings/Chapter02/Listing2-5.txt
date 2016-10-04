@@ -1,0 +1,13 @@
+public class IssueCollection : BusinessObjectCollection
+{
+    public IssueCollection()
+    {
+        return;
+    }
+
+    //create a new instance of the Issue object
+    public override BusinessObject New()
+    {
+        return new Issue();
+    }
+}

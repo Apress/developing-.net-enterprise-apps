@@ -1,0 +1,14 @@
+public class IssueSummary : System.Web.UI.Page
+{
+    protected System.Web.UI.WebControls.DataGrid gridIssues;
+
+    private IssueManager _Issues = new IssueManager();
+
+    private void Page_Load(object sender, System.EventArgs e)
+    {
+        gridIssues.DataSource = _Issues.GetAllIssues();
+        gridIssues.DataBind();
+
+        return;
+    }
+}

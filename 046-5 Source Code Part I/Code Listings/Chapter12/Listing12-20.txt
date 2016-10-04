@@ -1,0 +1,32 @@
+public class DocumentAdapterService : System.ServiceProcess.ServiceBase, 
+IIntegrationAdapter
+{
+    private static HttpChannel _Channel = new HttpChannel();
+    private static string _IntegrationServerPath = "http://127.0.0.1:3200";
+    private static IIntegrationServer _IntegrationService;
+
+    //... other collapsed service and IIntegrationAdapter code
+
+    protected override void OnStart(string[] args)
+    {
+        try
+        {
+            LoadConfigurationData();
+
+            ChannelServices.RegisterChannel( _Channel );
+
+            _IntegrationService = (IIntegrationServer)Activator.GetObject(
+                typeof( IIntegrationServer ),
+                _IntegrationServerPath + "/IntegrationServer.soap" );
+        }
+        catch( Exception x )
+        {
+            EventLog systemLog = new EventLog();
+            systemLog.Source = "IssueTracker";
+            systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+            systemLog.Dispose();
+        }
+
+        return;
+    }
+}

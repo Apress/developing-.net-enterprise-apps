@@ -1,0 +1,16 @@
+<service name="LoginServices">
+
+    <port name="LoginServicesSoap" binding="s0:LoginServicesSoap">
+        <soap:address  location="http://localhost/Issue.../LoginServices.asmx" /> 
+    </port>
+
+    <port name="LoginServicesHttpGet" binding="s0:LoginServicesHttpGet">
+        <http:address location="http://localhost/Issue.../LoginServices.asmx" /> 
+    </port>
+
+    <port name="LoginServicesHttpPost" binding="s0:LoginServicesHttpPost">
+        <http:address location="http://localhost/Issue.../LoginServices.asmx" /> 
+    </port>
+
+</service>
+</definitions>

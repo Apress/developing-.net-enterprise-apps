@@ -1,0 +1,44 @@
+public ArrayList GetMail()
+{
+    MailMessage message;
+    Outlook.MailItem msgInbox;
+    ArrayList arrayMessages = null;
+    Outlook.ApplicationClass appOutlook = null;
+
+    try
+    {
+        arrayMessages = new ArrayList();
+
+        //connect to the CDO library
+        appOutlook = new Outlook.ApplicationClass();
+        Outlook.NameSpace appNamespace = appOutlook.GetNamespace("MAPI");
+        appNamespace.Logon( "jkanalakis", "jkanalakis", false, false );
+
+        //navigate to the inbox folder
+        Outlook.Explorer exp = appOutlook.Explorers.Item(1);
+
+        for( int intIdx = 1; intIdx <= exp.CurrentFolder.Items.Count; intIdx++ )
+        {
+            //retrieve the next message from the inbox
+            msgInbox = (Outlook.MailItem)exp.CurrentFolder.Items.Item(intIdx);
+
+            //convert data into MailMessage
+            message = new MailMessage();
+            message.Subject = msgInbox.Subject;
+            message.Body = msgInbox.Body;
+
+            //add MailMessage to the ArrayList
+            arrayMessages.Add( message );
+        }
+    }
+    catch( Exception exception ) 
+    {
+        LogEvent( x.Message );
+    }
+    finally
+    {
+        Marshal.ReleaseComObject( appOutlook );
+    }
+
+    return arrayMessages;
+}

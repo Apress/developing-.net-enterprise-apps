@@ -1,0 +1,7 @@
+In most cases, the application forms will be in the same project as the
+application's Main method; in this case the "WinUI" project. However, 
+Chapter 8 illustrates the concept of placing form code outside the main
+application project in order to easily swap-out and replace functionality.
+
+This way, when new forms become available in a later service pack release, 
+only a single assembly needs to be deployed to the customer.

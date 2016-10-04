@@ -1,0 +1,83 @@
+public class Controller
+{
+    //definition of action types
+    public enum ControllerActions
+    {
+        New = 1,
+        View = 2, 
+        Edit = 3,
+        Delete = 4
+    }
+
+
+    //reference to the controller MDI parent
+    static private Form _ParentForm;
+
+    //container for all of the individual object mappings
+    static ArrayList _ObjectMappings = new ArrayList();
+
+
+    //property accessor to set parent form
+    public Form ParentForm
+    {
+        set
+        {
+            _ParentForm = value;
+        }
+    }
+
+
+    public Controller()
+    {
+        //hard-code new issue mapping
+        ObjectMappingEntry entry;
+
+        entry = new ObjectMappingEntry();
+        entry.Action = ControllerActions.View;
+        entry.BusinessObjectName = "IssueCollection";
+        entry.Viewer = "WinUI.FormIssueSummary";
+        _ObjectMappings.Add( entry );
+
+        entry = new ObjectMappingEntry();
+        entry.Action = ControllerActions.View;
+        entry.BusinessObjectName = "Issue";
+        entry.Viewer = "WinUI.FormIssueDetails";
+        _ObjectMappings.Add( entry );
+
+        entry = new ObjectMappingEntry();
+        entry.Action = ControllerActions.New;
+        entry.BusinessObjectName = "Issue";
+        entry.Viewer = "WinUI.FormIssueDetails";
+        _ObjectMappings.Add( entry );
+
+        return;
+    }
+
+
+    public static void Process( object argObject, ControllerActions argAction )
+    {
+        //based on mapping, display specific form
+        foreach( ObjectMappingEntry objMapping in _ObjectMappings )
+        {
+            //find the right business object
+            if( argObject.GetType().Name.CompareTo( 
+                objMapping.BusinessObjectName ) == 0 )
+            {
+                //find the right action
+                if( objMapping.Action == argAction )
+                {
+                    //start the viewer
+                    Type typeViewer = Assembly.GetExecutingAssembly().GetType( 
+                        objMapping.Viewer );
+
+                    Form formViewer = (Form)Activator.CreateInstance(typeViewer);
+                    formViewer.MdiParent = _ParentForm;
+                    formViewer.Show();
+
+                    break;
+                }
+            }
+        }
+        return;
+    }
+}

@@ -1,0 +1,54 @@
+using System;
+using System.Collections;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.ServiceProcess;
+
+
+namespace LiquidServer
+{
+    //changed class declaration - other inherited interfaces
+    public class System.ServiceProcess.ServiceBase
+    {
+        private System.ComponentModel.Container components = null;
+
+        public IntegrationServer()
+        {
+            InitializeComponent();
+        }
+
+        static void Main()
+        {
+            System.ServiceProcess.ServiceBase[] ServicesToRun;
+            ServicesToRun = new System.ServiceProcess.ServiceBase[] 
+                { new IntegrationServer() };
+            System.ServiceProcess.ServiceBase.Run(ServicesToRun);
+        }
+
+        private void InitializeComponent()
+        {
+            components = new System.ComponentModel.Container();
+            this.ServiceName = "IntegrationServer";
+        }
+
+        protected override void Dispose( bool disposing )
+        {
+            if( disposing )
+            {
+                if (components != null) 
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose( disposing );
+        }
+
+        protected override void OnStart(string[] args)
+        {
+        }
+ 
+        protected override void OnStop()
+        {
+        }
+}

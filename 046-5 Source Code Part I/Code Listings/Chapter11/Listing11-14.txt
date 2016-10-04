@@ -1,0 +1,51 @@
+private void Page_Load(object sender, System.EventArgs e)
+{
+    Point pointStart;
+    Point pointEnd;
+
+    try
+    {
+        SolidBrush brush = new SolidBrush( Color.Blue );
+        Bitmap bmpChart = new Bitmap( 80, 80 );
+
+        Graphics g = Graphics.FromImage( bmpChart );
+        g.Clear( Color.White );
+
+        pointStart = new Point( 1, 1 );
+        pointEnd = new Point( 10, 40 );
+        g.DrawLine( new Pen( brush, 2 ), pointStart, pointEnd );
+
+        pointStart = pointEnd;
+        pointEnd = new Point( 20, 20 );
+        g.DrawLine( new Pen( brush, 2 ), pointStart, pointEnd );
+
+        pointStart = pointEnd;
+        pointEnd = new Point( 30, 50 );
+        g.DrawLine( new Pen( brush, 2 ), pointStart, pointEnd );
+
+        pointStart = pointEnd;
+        pointEnd = new Point( 40, 45 );
+        g.DrawLine( new Pen( brush, 2 ), pointStart, pointEnd );
+
+        pointStart = pointEnd;
+        pointEnd = new Point( 60, 45 );
+        g.DrawLine( new Pen( brush, 2 ), pointStart, pointEnd );
+
+        Font fontLabel = new Font( "Arial", 8 );
+        g.DrawString("1  2  3  4  5  6", fontLabel, brush, 1,50 );
+
+        bmpChart.Save( @"c:\inetpub\wwwroot\issuetracker_mobileui\chart.gif", 
+            ImageFormat.Gif );
+
+        imgChart.ImageUrl = "http://127.0.0.1/issuetracker_mobileui/chart.gif";
+
+    }
+    catch(Exception x)
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+    }
+
+    return;
+}

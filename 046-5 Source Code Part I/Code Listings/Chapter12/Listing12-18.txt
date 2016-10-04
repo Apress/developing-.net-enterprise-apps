@@ -1,0 +1,21 @@
+public string SendToServer( string strData )
+{
+    try
+    {
+        MessageQueue queue = new MessageQueue( "server\\integrationQueue" );
+        queue.Send( "AppDemo", strData );
+    }
+    catch( Exception x )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "Integration Adapter";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+        systemLog.Dispose();
+    }
+    finally
+    {
+        queue.Dispose();
+    }
+
+    return strData;
+}

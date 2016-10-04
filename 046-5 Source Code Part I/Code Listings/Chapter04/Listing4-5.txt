@@ -1,0 +1,25 @@
+public Message ReceiveMessage()
+{
+    MessageQueue queue = null;
+    Message message = null;
+
+    try
+    {
+        queue = new MessageQueue( _QueueInboxName );
+
+        //retrieve message from the queue
+        message = queue.Receive();
+    }
+    catch( Exception exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        queue.Close();
+    }
+
+    return message;
+}

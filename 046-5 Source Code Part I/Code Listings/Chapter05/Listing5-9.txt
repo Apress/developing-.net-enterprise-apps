@@ -1,0 +1,55 @@
+public void SendMessage( MailMessageTemplate argTemplate, Issue argIssue )
+{
+    int intStart = 0;
+    int intEnd = 0;
+    string strField = "";
+    string strValue = "";
+    string strSource = "";
+
+    Type objType;
+    FieldInfo field;
+
+    try
+    {
+        //fill the message template
+        strSource = argTemplate.Body;
+
+        while( intStart >= 0 )
+        { 
+            //find the start
+            intStart = strSource.IndexOf( "<Issue.", intStart ) + 7;
+
+            //find the end
+            intEnd = strSource.IndexOf( ">", intStart );
+
+            //get the field name
+            strField = strSource.Substring( intStart, intEnd - intStart );
+
+            objType = argIssue.GetType();
+            field = objType.GetField( strField );
+
+            strValue = field.GetValue( objType ).ToString();
+
+            strSource = strSource.Replace( "<Issue." + strField + ">", strValue);
+        };
+
+        //set the outgoing message
+        MailMessage _OutgoingMessage = new MailMessage();
+        _OutgoingMessage.To = _UserTo.EmailAddress;
+        _OutgoingMessage.Cc = _UserCc.EmailAddress;
+        _OutgoingMessage.Bcc = _UserBcc.EmailAddress;
+        _OutgoingMessage.From = _UserFrom.EmailAddress;
+        _OutgoingMessage.Subject = argTemplate.Subject;
+        _OutgoingMessage.Body = strSource;
+
+        //send the messsage
+        SmtpMail.SmtpServer = "localhost";
+        SmtpMail.Send( _OutgoingMessage );
+    }
+    catch( Exception x )
+    {
+        LogEvent( x.Message );
+    }
+
+    return;
+}

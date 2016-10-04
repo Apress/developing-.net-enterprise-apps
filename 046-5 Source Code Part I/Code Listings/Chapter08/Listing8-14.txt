@@ -1,0 +1,13 @@
+private void FormDataManager_Load(object sender, System.EventArgs e)
+{
+    datagridTypes.DataSource = mgrReference.GetEntireDataSet();
+    datagridTypes.DataMember = "Val_IssueType";
+
+    datagridStatuses.DataSource = mgrReference.GetEntireDataSet();
+    datagridStatuses.DataMember = "Val_IssueType";
+
+    datagridPriorities.DataSource = mgrReference.GetEntireDataSet();
+    datagridPriorities.DataMember = "Val_IssueType";
+
+    return;
+}

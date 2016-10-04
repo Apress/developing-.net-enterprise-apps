@@ -1,0 +1,59 @@
+public bool SelectOne( BusinessObject objSource, int intObjectID )
+{
+    bool boolStatus = false;
+    string strObject;
+    string strStoredProc;
+    SqlParameter parameter;
+    SqlCommand command;
+
+    try
+    {
+        //get the object name
+        Type objType = objSource.GetType();
+        strObject = objType.FullName.Substring( objType.FullName.IndexOf(".")+1);
+
+        //get the stored procedure name
+        strStoredProc = "app_";
+        strStoredProc += strObject;
+        strStoredProc += "Select";
+
+        //initialize the command
+        command = new SqlCommand( strStoredProc, dataComponent.Connection );
+        command.CommandType = CommandType.StoredProcedure;
+
+        //add the ID parameter
+        parameter = new SqlParameter( "@" + strObject + "ID", SqlDbType.Int );
+        parameter.Direction = ParameterDirection.Input;
+        parameter.Value = intObjectID;
+        command.Parameters.Add( parameter );
+
+        //open the connection and execute query
+        dataComponent.Connection.Open();
+        SqlDataReader reader = command.ExecuteReader();
+
+        if( reader.Read() )
+        {
+            //examine results and set business object, set return code to true
+            for( int intIndex = 0; intIndex < reader.FieldCount; intIndex++ )
+            {
+                string strColName = reader.GetName( intIndex );
+                PropertyInfo field = objType.GetProperty( strColName );
+                field.SetValue( objSource, reader.GetValue( intIndex ), null );
+            }
+
+            boolStatus = true;
+        }
+    }
+    catch( Exception exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        dataComponent.Connection.Close();
+    }
+
+    return boolStatus;
+}

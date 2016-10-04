@@ -1,0 +1,22 @@
+private void btnLogin_Click(object sender, System.EventArgs e)
+{
+    try
+    {
+        if( FormsAuthentication.Authenticate( txtUsername.Text, txtPwd.Text ) )
+        {
+            FormsAuthentication.SetAuthCookie( txtLogin.Text, false );
+            MobileFormsAuthentication.RedirectFromLoginPage(txtLogin.Text, true);
+        }
+        else
+        {
+            lblMessage.Text = "Login Failed.";
+        }
+    }
+    catch( Exception x )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+    }
+    retrun;
+}

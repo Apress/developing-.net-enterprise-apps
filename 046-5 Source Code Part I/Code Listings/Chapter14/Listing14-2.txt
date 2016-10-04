@@ -1,0 +1,42 @@
+private void btnSetup_OnClick(object sender, System.EventArgs e)
+{
+    SqlConnection sqlConnection = new SqlConnection();
+
+    try
+    {
+        //format the connection string
+        string strConnString = "server=" + txtServer.Text + ";uid=" +
+        txtLogin.Text + ";pwd=" + txtPassword.Text;
+
+        //create the new database
+        sqlConnection.ConnectionString = strConnString;
+        sqlConnection.Open();
+        sqlConnection.ChangeDatabase( "master" );
+        SqlCommand sqlCommand = new SqlCommand( "CREATE DATABASE " + 
+            "IssueTracker", sqlConnection );
+        sqlCommand.ExecuteNonQuery();
+
+
+        //read the sql sourcefile
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        string strAssemblyPath = assembly.GetName().Name + ".CreateDatabase.sql";
+        Stream stream = assembly.GetManifestResourceStream( strAssemblyPath );
+        StreamReader reader = new StreamReader( stream );
+
+        //execute table create sql file
+        sqlConnection.ChangeDatabase( "IssueTracker" );
+        sqlCommand = new SqlCommand( reader.ReadToEnd(), sqlConnection );
+        sqlCommand.ExecuteNonQuery();
+
+        MessageBox.Show( "IssueTracker database setup complete.", "Succeess"  );
+    }
+    catch( SqlException x )
+    {
+        MessageBox.Show( x.Message, "Database Setup Failed"  );
+    }
+    finally
+    {
+        sqlConnection.Close();
+    }
+    return;
+}

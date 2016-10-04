@@ -1,0 +1,17 @@
+<Dat_Issue>
+    <IssueID>1</IssueID> 
+    <TypeID>1</TypeID> 
+    <EntryDate>2002-08-15T00:00:00.0000000-07:00</EntryDate> 
+    <StatusID>1</StatusID> 
+    <Summary>Unable to print</Summary> 
+    <Description>I can not print any PowerPoint files on the //MKT-GROUP
+        printer in the lobby.</Description> 
+    <PriorityID>1</PriorityID> 
+    <User>
+        <Firstname>Larry</Firstname> 
+        <Lastname>Dalton</Lastname> 
+        <Description>Marketing Director</Description>
+        <EmailAddress>larryd@sample.com</EmailAddress> 
+        <UserType>1</UserType> 
+    </User>
+</Dat_Issue>

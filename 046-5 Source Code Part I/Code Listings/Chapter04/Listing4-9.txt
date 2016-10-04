@@ -1,0 +1,24 @@
+public ArrayList ListApplicationQueues()
+{
+    ArrayList arrayQueues = new ArrayList();
+
+    try
+    {
+        arrayQueues.AddRange( 
+            MessageQueue.GetPublicQueuesByLabel( _QueueInboxName ) );
+
+        arrayQueues.AddRange( 
+            MessageQueue.GetPublicQueuesByLabel( _QueueOutboxName ) );
+
+        arrayQueues.AddRange( 
+            MessageQueue.GetPublicQueuesByLabel( _QueueErrorsName ) );
+    }
+    catch( MessageQueueException exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+
+    return arrayQueues;
+}

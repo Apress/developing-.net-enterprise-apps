@@ -1,0 +1,17 @@
+public ArrayList ListAllQueues()
+{
+    ArrayList arrayQueues = new ArrayList();
+
+    try
+    {
+        arrayQueues.AddRange( MessageQueue.GetPrivateQueuesByMachine( "." ) );
+    }
+    catch( MessageQueueException exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+
+    return arrayQueues;
+}

@@ -1,0 +1,46 @@
+private void LoadConfigurationData()
+{
+    //object representing a single application-to-application mapping
+    MappingEntry entry;
+
+    //using XPath to retrieve the configuration data
+    XmlDocument xmldoc = new XmlDocument();
+    xmldoc.Load( "IntegrationServer.exe.config" );
+    XmlNode root = xmldoc.DocumentElement;
+
+    try 
+    {
+        XmlNodeList xnodelist = 
+            root.SelectNodes( "/configuration/AppMappings/Integration" ); 
+
+        foreach( XmlNode xnode in xnodelist )
+        {
+            //create a new entry object
+            entry = new MappingEntry();
+
+            entry.SourceSchema = xnode.Attributes["SourceSchema"].Value;
+
+            entry.DestinationSchema = 
+                xnode.Attributes["DestinationSchema"].Value;
+
+            entry.DestinationAddress = 
+                xnode.Attributes["DestinationAddress"].Value;
+
+            entry.TransformationFile = xnode.Attributes["Transformation"].Value;
+
+            //add this mapping to the collection
+            _ApplicationMappings.Add( entry );
+
+        }
+    
+    } 
+    catch( Exception x ) 
+    {          
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+        systemLog.Dispose();
+    }
+ 
+    return;
+}

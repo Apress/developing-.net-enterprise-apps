@@ -1,0 +1,11 @@
+CREATE PROCEDURE dbo.app_IssueSelectAsXml
+(
+	@IssueID int
+)
+AS
+
+SET NOCOUNT ON;
+
+SELECT IssueID, TypeID, UserID, EntryDate, StatusID, Summary, Description,
+PriorityID, ModifiedDate FROM Dat_Issue WHERE (IssueID = @IssueID) FOR XML AUTO;
+GO

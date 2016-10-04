@@ -1,0 +1,11 @@
+private void btnBack_Click(object sender, System.EventArgs e)
+{
+    BindingContext[managerIssue].Position--;
+    return;
+}
+
+private void btnNext_Click(object sender, System.EventArgs e)
+{
+    BindingContext[managerIssue].Position++;
+    return;
+}

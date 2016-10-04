@@ -1,0 +1,24 @@
+public class ReferenceDataManager
+{
+    DataComponent _AppDataComponent;
+
+    public ReferenceDataManager()
+    {
+        _AppDataComponent = new DataComponent();
+    }
+
+    public DataTable GetIssueTypes()
+    {
+        return _AppDataComponent.ReferenceDataSet.Val_IssueType;
+    }
+
+    public DataTable GetPriorities()
+    {
+        return _AppDataComponent.ReferenceDataSet.Val_Priority;
+    }
+
+    public DataTable GetStatuses()
+    {
+        return _AppDataComponent.ReferenceDataSet.Val_Status;
+    }
+}

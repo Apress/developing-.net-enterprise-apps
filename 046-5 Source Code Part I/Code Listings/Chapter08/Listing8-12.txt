@@ -1,0 +1,37 @@
+private void FormIssueDetails_Load(object sender, System.EventArgs e)
+{
+    //reference the application's DataSet object
+    ReferenceDataManager mgrReference = new ReferenceDataManager();
+
+    //bind the validation data
+    cboPriority.DataSource = mgrReference.GetPriorities();
+    cboPriority.DisplayMember = "PriorityLabel";
+    cboPriority.ValueMember = "PriorityID";
+
+    cboType.DataSource = mgrReference.GetIssueTypes();
+    cboType.DisplayMember = "TypeLabel";
+    cboType.ValueMember = "TypeID";
+
+    cboStatus.DataSource = mgrReference.GetStatuses();
+    cboStatus.DisplayMember = "StatusLabel";
+    cboStatus.ValueMember = "StatusID";
+
+    txtEntryDate.Text = DateTime.Now.ToString();
+
+
+    if( ViewMode == Controller.ControllerActions.View ||
+        ViewMode == Controller.ControllerActions.Edit )
+    {
+        IssueManager managerIssue = new IssueManager();
+        Issue issue = managerIssue.GetIssue( m_intIssueID );
+
+        txtEntryDate.DataBindings.Add( "Text", issue, "EntryDate" );
+        cboType.DataBindings.Add( "Text", issue, "TypeID" );
+        cboStatus.DataBindings.Add( "Text", issue, "StatusID" );
+        cboPriority.DataBindings.Add( "Text", issue, "PriorityID" );
+        txtSummary.DataBindings.Add( "Text", issue, "Summary" );
+        txtDescription.DataBindings.Add( "Text", issue, "Description" );
+    }
+
+    return;
+}

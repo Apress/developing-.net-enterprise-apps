@@ -1,0 +1,19 @@
+private void btnOK_Click(object sender, System.EventArgs e)
+{
+    Issue objIssue = new Issue();
+
+    //assign business object properties
+    objIssue.Description = Issue_Description.Text;
+    objIssue.EntryDate = Issue_EntryDate.Text;
+    objIssue.PriorityID = Issue_PriorityID.SelectedValue;
+    objIssue.StatusID = Issue_StatusID.SelectedValue;
+    objIssue.Summary = Issue_Summary.Text;
+    objIssue.TypeID = Issue_TypeID.SelectedValue;
+
+    //validate business object
+    lblError.Text = objIssue.Validate();
+    if( lblError.Text.Length == 0 )
+        Response.Redirect( "IssueSummary.aspx", true );
+
+    return;
+}

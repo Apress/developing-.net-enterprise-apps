@@ -1,0 +1,5 @@
+public void PlayAlertSound()
+{
+    //sound file should be added to project with 'Content' build type
+    SoundLayer.Play( "\\Windows\\AlertSound.wav" );
+}

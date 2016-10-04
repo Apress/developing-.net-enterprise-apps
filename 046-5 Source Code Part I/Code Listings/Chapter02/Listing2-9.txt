@@ -1,0 +1,67 @@
+public bool Insert( BusinessObject objSource )
+{
+    bool boolStatus = false;
+    string strObject;
+    string strStoredProc;
+    SqlParameter parameter;
+    SqlCommand command;
+
+    try
+    {
+        //get the object name
+        Type objType = objSource.GetType();
+        strObject = objType.FullName.Substring( objType.FullName.IndexOf(".")+1);
+
+        //get the stored procedure name
+        strStoredProc = "app_";
+        strStoredProc += strObject;
+        strStoredProc += "Insert";
+
+        //initialize the command
+        command = new SqlCommand( strStoredProc, dataComponent.Connection );
+        command.CommandType = CommandType.StoredProcedure;
+
+        //add the parameters
+        parameter = new SqlParameter( "@RETURN_VALUE", SqlDbType.Int );
+        parameter.Direction = ParameterDirection.ReturnValue;
+        command.Parameters.Add( parameter );
+
+        PropertyInfo[] fields = objType.GetProperties();
+
+        for( int intIndex = 0; intIndex < fields.Length; intIndex++ )
+        {
+            parameter = new SqlParameter( "@" + fields[intIndex].Name,
+                fields[intIndex].PropertyType );
+
+            parameter.Direction = ParameterDirection.Input;
+            parameter.Value = fields[intIndex].GetValue( objSource, null );
+            command.Parameters.Add( parameter );
+        }
+
+        //open the connection and execute query
+        dataComponent.Connection.Open();
+        command.ExecuteNonQuery();
+
+        //return the results of the procedure
+        if( (Int32)command.Parameters["@RETURN_VALUE"].Value == 0 )
+            boolStatus = true;
+    }
+    catch( SqlException exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    catch( Exception exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        dataComponent.Connection.Close();
+    }
+
+    return boolStatus;
+}

@@ -1,0 +1,31 @@
+public BusinessObject ReceiveBusinessObject()
+{
+    MessageQueue queue = null;
+    BusinessObject objReceived = null;
+
+    try
+    {
+        queue = new MessageQueue( _QueueInboxName );
+
+        //retrieve message from the queue
+        Message message = queue.Receive();
+
+        //specify the message formatter
+        message.Formatter = new BinaryMessageFormatter();
+
+        //display retrieved object data
+        objReceived = (BusinessObject)message.Body;
+    }
+    catch( MessageQueueException exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        queue.Close();
+    }
+
+    return objReceived;
+}

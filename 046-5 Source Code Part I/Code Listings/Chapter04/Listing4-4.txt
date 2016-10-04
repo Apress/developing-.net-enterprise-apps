@@ -1,0 +1,29 @@
+public void SendMessage( string strTargetProcess, string strSubject, 
+    string strBody )
+{
+    MessageQueue queue = null;
+    string strTargetQueueName;
+
+    try
+    {
+        strTargetQueueName = ".\\private$\\" + strTargetProcess + "Inbox";
+
+        if( MessageQueue.Exists( strTargetQueueName ) )
+        {
+            queue = new MessageQueue( strTargetQueueName );
+            queue.Send( strSubject, strBody );
+        }
+    }
+    catch( MessageQueueException exception )
+    {
+        EventLog systemLog = new EventLog();
+        systemLog.Source = "IssueTracker";
+        systemLog.WriteEntry( exception.Message, EventLogEntryType.Error, 0 );
+    }
+    finally
+    {
+        queue.Close();
+    }
+
+    return;
+}

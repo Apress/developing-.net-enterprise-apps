@@ -1,0 +1,30 @@
+<%@ Page language="c#" Codebehind="login_enter.aspx.cs" 
+    Inherits="IssueTracker.LoginForm" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+    <body MS_POSITIONING="GridLayout">
+    <FORM id="LoginForm" method="post" runat="server">
+
+    <DIV style="DISPLAY: inline; Z-INDEX: 101; LEFT: 240px; WIDTH: 70px; 
+        POSITION: absolute; TOP: 24px; HEIGHT: 15px" 
+        ms_positioning="FlowLayout">Username:</DIV>
+
+    <INPUT style="Z-INDEX: 102; LEFT: 328px; POSITION: absolute; TOP: 24px" 
+        type="text" name="edtUsername">
+
+    <DIV style="DISPLAY: inline; Z-INDEX: 103; LEFT: 240px; WIDTH: 70px; 
+        POSITION: absolute; TOP: 56px; HEIGHT: 15px" 
+        ms_positioning="FlowLayout">Password:</DIV>
+
+    <INPUT style="Z-INDEX: 104; LEFT: 328px; POSITION: absolute; TOP: 64px" 
+        type="password" name="edtPassword">
+
+    <INPUT style="Z-INDEX: 105; LEFT: 328px; POSITION: absolute; TOP: 96px" 
+        type="button" value="   OK   " name="btnOK">
+
+    <INPUT style="Z-INDEX: 106; LEFT: 400px; POSITION: absolute; TOP: 96px" 
+        type="button" value="Cancel" name="btnCancel"></FORM>
+
+    </FORM>
+    </body>
+</HTML>

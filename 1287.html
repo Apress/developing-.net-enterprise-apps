@@ -1,0 +1,113 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./1590590465-1%20errata_files/filelist.xml">
+<title>Developing </title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Doris Wong</o:Author>
+  <o:LastAuthor>Doris Wong</o:LastAuthor>
+  <o:Revision>1</o:Revision>
+  <o:TotalTime>1</o:TotalTime>
+  <o:Created>2003-12-15T23:25:00Z</o:Created>
+  <o:LastSaved>2003-12-15T23:26:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Company> Apress</o:Company>
+  <o:Lines>1</o:Lines>
+  <o:Paragraphs>1</o:Paragraphs>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=EN-US style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal>Developing .NET Enterprise Applications<o:p></o:p></p>
+
+<p class=MsoNormal>John Kanalakis<o:p></o:p></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>Errata : Appendix A<o:p></o:p></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>The SQL table definition script for the Dat_Issue table is
+missing a <o:p></o:p></p>
+
+<p class=MsoNormal>definition for the ModifiedDate column. The correct table
+definition should <o:p></o:p></p>
+
+<p class=MsoNormal>be:<o:p></o:p></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal>CREATE TABLE [dbo].[Dat_Issue] (<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>[IssueID]
+[int] NOT NULL ,<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>[TypeID]
+[int] NULL ,<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>[UserID]
+[int] NULL ,<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>[EntryDate]
+[datetime] NULL ,<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>[StatusID]
+[int] NULL ,<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>[Summary]
+[char] (128) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>[Description]
+[text] COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>[PriorityID]
+[int] NULL ,<o:p></o:p></p>
+
+<p class=MsoNormal><span style='mso-tab-count:1'>            </span>[ModifiedDate]
+[datetime] NULL<o:p></o:p></p>
+
+<p class=MsoNormal>) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]<o:p></o:p></p>
+
+<p class=MsoNormal>GO</p>
+
+</div>
+
+</body>
+
+</html>

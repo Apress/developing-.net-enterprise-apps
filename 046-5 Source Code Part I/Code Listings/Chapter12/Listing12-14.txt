@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="AppMappings">
+            <section name="Integration" />
+        </sectionGroup>
+    </configSections>
+
+    <AppMappings>
+        <Integration 
+            SourceSchema="appdemo.xml" 
+            DestinationSchema="issuetracker.xml" 
+            DestinationAddress="http://127.0.0.1:3202" 
+            Transformation="AppDemoToIssueTracker.xslt" 
+        />
+    </AppMappings>
+</configuration>

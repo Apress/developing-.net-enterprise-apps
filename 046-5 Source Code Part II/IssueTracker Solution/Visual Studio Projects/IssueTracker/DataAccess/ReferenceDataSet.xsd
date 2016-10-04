@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="ReferenceDataSet" targetNamespace="http://www.tempuri.org/ReferenceDataSet.xsd" xmlns:mstns="http://www.tempuri.org/ReferenceDataSet.xsd" xmlns="http://www.tempuri.org/ReferenceDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:element name="ReferenceDataSet" msdata:IsDataSet="true">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="Val_IssueType">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TypeID" msdata:DataType="System.Guid, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" type="xs:string" />
+              <xs:element name="TypeLabel" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Val_MailMessage">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MailMessageID" type="xs:int" />
+              <xs:element name="Format" type="xs:int" minOccurs="0" />
+              <xs:element name="Priority" type="xs:int" minOccurs="0" />
+              <xs:element name="Subject" type="xs:string" minOccurs="0" />
+              <xs:element name="Body" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Val_Priority">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PriorityID" msdata:DataType="System.Guid, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" type="xs:string" />
+              <xs:element name="PriorityLabel" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Val_Reports">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReportID" msdata:DataType="System.Guid, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" type="xs:string" />
+              <xs:element name="ReportLabel" type="xs:string" minOccurs="0" />
+              <xs:element name="ReportFilePath" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Val_Status">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StatusID" msdata:DataType="System.Guid, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" type="xs:string" />
+              <xs:element name="StatusLabel" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

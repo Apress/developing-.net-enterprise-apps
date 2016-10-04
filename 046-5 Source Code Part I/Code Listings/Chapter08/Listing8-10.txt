@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="Viewers">
+            <section name="Include" />
+        </sectionGroup>
+    </configSections>
+
+    <Viewers>
+        <Include BusinessObjectName="IssueCollection" Action="2" 
+            Viewer="ApplicationFramework.FormIssueSummary" />
+        <Include BusinessObjectName="Issue" Action="2" 
+            Viewer="ApplicationFramework.FormIssueDetails" />
+        <Include BusinessObjectName="Issue" Action="1" 
+            Viewer="ApplicationFramework.FormIssueDetails" />
+        <Include BusinessObjectName="Object" Action="3" 
+            Viewer="ApplicationFramework.FormDataManager" />
+    </Viewers>
+
+</configuration>

@@ -1,0 +1,10 @@
+private void InitializeTimer()
+{
+    Timer1.Interval = 1000;
+    Timer1.Enabled = true;
+}
+
+private void Timer1_Tick( object Sender, EventArgs e )
+{
+    statusbar.Text = "Current Time: " + DateTime.Now.ToLongTimeString();
+}

@@ -1,0 +1,28 @@
+[RunInstaller(true)]
+public class DatabaseSetup : System.Configuration.Install.Installer
+{
+    DatabaseSetupForm formDatabase = new DatabaseSetupForm();
+    private System.ComponentModel.Container components = null;
+
+    public DatabaseSetup()
+    {
+        InitializeComponent();
+    }
+
+    private void InitializeComponent()
+    {
+        components = new System.ComponentModel.Container();
+    }
+
+    public override void Install(IDictionary savedState)
+    {
+        base.Install (savedState);
+        formDatabase.ShowDialog();
+    }
+
+    public override void Commit(IDictionary savedState)
+    {
+        base.Commit (savedState);
+        formDatabase.ShowDialog();
+    }
+}

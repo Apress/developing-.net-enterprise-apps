@@ -1,0 +1,35 @@
+public class IntegrationServer : System.ServiceProcess.ServiceBase, 
+IIntegrationServer
+{
+    private System.ComponentModel.Container components = null;
+
+    static HttpChannel _Channel;
+    static int _PortNumber = 3200;
+    ArrayList _ApplicationMappings = new ArrayList();
+
+    protected override void OnStart(string[] args)
+    {
+        try
+        {
+            _Channel = new HttpChannel( _PortNumber );
+
+            ChannelServices.RegisterChannel( _Channel );
+
+            RemotingConfiguration.RegisterWellKnownServiceType(
+                typeof( IntegrationServer ),
+                "IntegrationServer.soap",
+                WellKnownObjectMode.Singleton );
+        }
+        catch( Exception x )
+        {
+            EventLog systemLog = new EventLog();
+            systemLog.Source = "Integration Adapter";
+            systemLog.WriteEntry( x.Message, EventLogEntryType.Error, 0 );
+            systemLog.Dispose();
+        }
+    }
+ 
+    protected override void OnStop()
+    {
+    }
+}

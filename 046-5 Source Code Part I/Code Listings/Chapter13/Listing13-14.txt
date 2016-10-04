@@ -1,0 +1,28 @@
+using System;
+using System.Security.Permissions;
+
+public class IssueManager
+{
+    [PrincipalPermission(SecurityAction.Demand, Role="All")]
+    [PrincipalPermission(SecurityAction.Demand, Role="Manager")]
+    public IssueManager() {}
+
+    [PrincipalPermission(SecurityAction.Demand, Role="All")]
+    [PrincipalPermission(SecurityAction.Demand, Role="Manager")]
+    public BusinessRules.IssueCollection GetAllIssues(){}
+
+    [PrincipalPermission(SecurityAction.Demand, Role="All")]
+    [PrincipalPermission(SecurityAction.Demand, Role="Manager")]
+    public BusinessRules.Issue GetSpecificIssue( int argIntIssueID ){}
+
+    [PrincipalPermission(SecurityAction.Demand, Role="All")]
+    [PrincipalPermission(SecurityAction.Demand, Role="Manager")]
+    public bool InsertIssue( BusinessRules.Issue argIssue ){}
+
+    [PrincipalPermission(SecurityAction.Demand, Role="Manager")]
+    public bool UpdateIssue( BusinessRules.Issue argIssue ){}
+
+    [PrincipalPermission(SecurityAction.Demand, Role="Manager")]
+    public bool DeleteIssue( BusinessRules.Issue argIssue ){}
+
+}
